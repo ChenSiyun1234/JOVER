@@ -12,6 +12,10 @@ static void usart_transmitChar(USART_TypeDef *bus, char c);
 
 
 bool usart_init(USART_TypeDef *bus, int baud_rate) {
+
+
+
+
 	return true;
 
 }
@@ -66,32 +70,14 @@ static void usart3_gpio_init() {
 	GPIOB->AFR[1] |= ((GPIO_AFRX_AF7 << GPIO_AFRH_AFSEL10_Pos) | (GPIO_AFRX_AF7 << GPIO_AFRH_AFSEL11_Pos));
 }
 
-// TX = PC10-AF5 | RX = PC11-AF5
 static void uart4_gpio_init() {
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
-
-	GPIOC->MODER &= ~(GPIO_MODER_MODE10_Msk | GPIO_MODER_MODE11_Msk);
-	GPIOC->MODER |= (GPIO_MODER_MODE10_1 | GPIO_MODER_MODE11_1);
-
-	GPIOC->AFR[1] &= ~(GPIO_AFRH_AFSEL10_Msk | GPIO_AFRH_AFSEL11_Msk);
-	GPIOC->AFR[1] |= ((GPIO_AFRX_AF5 << GPIO_AFRH_AFSEL10_Pos) | (GPIO_AFRX_AF5 << GPIO_AFRH_AFSEL11_Pos));
+	return;
 }
 
-// TX = PC12-AF5 | RX = PD2-AF5
 static void uart5_gpio_init() {
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIODEN;
-
-	GPIOC->MODER &= ~GPIO_MODER_MODE12_Msk;
-	GPIOC->MODER |= GPIO_MODER_MODE12_1;
-	GPIOD->MODER &= ~GPIO_MODER_MODE2_Msk;
-	GPIOD->MODER |= GPIO_MODER_MODE2_1;
-
-	GPIOC->AFR[1] &= ~GPIO_AFRH_AFSEL12_Msk;
-	GPIOC->AFR[1] |= (GPIO_AFRX_AF5 << GPIO_AFRH_AFSEL12_Pos);
-	GPIOD->AFR[0] &= ~GPIO_AFRL_AFSEL2;
-	GPIOD->AFR[0] |= (GPIO_AFRX_AF5 << GPIO_AFRL_AFSEL2_Pos);
+	return;
 }
 
-// TX=
-static void lpuart1_gpio_init();
+static void lpuart1_gpio_init() {
+	return;
+};
