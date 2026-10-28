@@ -2,36 +2,41 @@
 #define GPIO_H
 
 #include "stm32g474xx.h"
-#include <stdint.h>
+
+#define GPIO_MODER_BIT_SPAN 4U
+#define GPIO_OSPEEDR_BIT_SPAN 2U
+#define GPIO_PUPDR_BIT_SPAN 2U
+#define GPIO_AFRX_BIT_SPAN 4U
+#define GPIO_AFRH_PIN_OFFSET 8U
 
 typedef enum {
-	GPIO_MODE_INPUT,
+	GPIO_MODE_INPUT = 0,
 	GPIO_MODE_OUTPUT,
 	GPIO_MODE_AF,
-	GPIO_MODE_ANALOG,
+	GPIO_MODE_ANALOG
 } gpio_mode_t;
 
 typedef enum {
-	GPIO_OUTPUT_PP,
+	GPIO_OUTPUT_PP = 0,
 	GPIO_OUTPUT_OD
 } gpio_output_type_t;
 
 
 typedef enum {
-	GPIO_NOPULL,
+	GPIO_NOPULL = 0,
 	GPIO_PULLUP,
 	GPIO_PULLDOWN
 } gpio_pull_t;
 
 typedef enum {
-	GPIO_SPEED_LOW,
+	GPIO_SPEED_LOW = 0,
 	GPIO_SPEED_MEDIUM,
 	GPIO_SPEED_HIGH,
 	GPIO_SPEED_VERY_HIGH
 } gpio_speed_t;
 
 typedef enum {
-	GPIO_AF_0,
+	GPIO_AF_0 = 0,
 	GPIO_AF_1,
 	GPIO_AF_2,
 	GPIO_AF_3,
@@ -50,7 +55,7 @@ typedef enum {
 } gpio_af_t;
 
 typedef enum {
-	GPIO_PIN_0,
+	GPIO_PIN_0 = 0,
 	GPIO_PIN_1,
 	GPIO_PIN_2,
 	GPIO_PIN_3,
@@ -70,11 +75,10 @@ typedef enum {
 
 typedef enum {
 	GPIO_STATE_LOW = 0,
-	GPIO_STATE_HIGH = 1
+	GPIO_STATE_HIGH
 } gpio_state_t;
 
 typedef struct {
-	gpio_pin_t pin;
 	gpio_mode_t mode;
 	gpio_output_type_t output_type;
 	gpio_pull_t pull;
@@ -82,12 +86,19 @@ typedef struct {
 	gpio_af_t alternate;
 } gpio_init_t;
 
-void gpio_init(GPIO_TypeDef *port, gpio_init_t config);
+void gpio_init(GPIO_TypeDef *port, gpio_pin_t pin, const gpio_init_t *config);
+gpio_init_t gpio_create_config(
+		gpio_mode_t mode,
+		gpio_output_type_t output_type,
+		gpio_pull_t pull,
+		gpio_speed_t speed,
+		gpio_af_t af
+);
 void gpio_set_mode(GPIO_TypeDef *port, gpio_pin_t pin, gpio_mode_t mode);
 void gpio_set_output_type(GPIO_TypeDef *port, gpio_pin_t pin, gpio_output_type_t output_type);
 void gpio_set_output_speed(GPIO_TypeDef *port, gpio_pin_t pin, gpio_speed_t speed);
-void gpio_set_pull(GPIO_TypeDef *port, uint32_t pin, gpio_pull_t pull_mode);
-void gpio_set_af(GPIO_TypeDef *port, uint32_t pin, gpio_af_t af);
+void gpio_set_pull(GPIO_TypeDef *port, gpio_pin_t pin, gpio_pull_t pull_mode);
+void gpio_set_af(GPIO_TypeDef *port, gpio_pin_t pin, gpio_af_t af);
 void gpio_enable_clock(GPIO_TypeDef *port);
 
 void gpio_write(GPIO_TypeDef *port, gpio_pin_t pin, gpio_state_t state);
