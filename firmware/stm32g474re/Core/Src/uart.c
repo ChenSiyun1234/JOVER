@@ -1,33 +1,56 @@
 #include "uart.h"
-
-
-static void usart1_gpio_init();
-static void usart2_gpio_init();
-static void usart3_gpio_init();
-static void uart4_gpio_init();
-static void uart5_gpio_init();
-static void lpuart1_gpio_init();
-static void uart_8bit_1stop(USART_TypeDef *bus, int baud_rate, bool rts_cts_control);
-static void usart_transmitChar(USART_TypeDef *bus, char c);
-
+#include "gpio.h"
 
 bool usart_init(USART_TypeDef *bus, int baud_rate) {
+	GPIO_TypeDef *rx_port;
+	GPIO_TypeDef *tx_port;
+	gpio_pin_t rx_pin;
+	gpio_pin_t tx_pin;
+
+	// USART1_RX = PA10 | USART1_TX = PA9
+	if (bus == USART1) {
+		rx_port = GPIOA;
+		tx_port = GPIOA;
+		rx_pin = GPIO_PIN_10;
+		tx_pin = GPIO_PIN_9;
+	// USART2_RX = PD6 | USART2_TX = PD5
+	} else if (bus == USART2) {
+		rx_port = GPIOD;
+		tx_port = GPIOD;
+		rx_pin = GPIO_PIN_6;
+		tx_pin = GPIO_PIN_5;
+	// USART3_RX = PC11 | USART3_TX = PC10
+	} else if (bus == USART3) {
+		rx_port = GPIOC;
+		tx_port = GPIOC;
+		rx_pin = GPIO_PIN_11;
+		tx_pin = GPIO_PIN_10;
+	} else {
+		return false;
+	}
+
+	gpio_config_t config = gpio_getDefaultConfig();
+	config.alternate = GPIO_AF_7;
+	config.mode = GPIO_MODE_AF;
+	gpio_init(rx_port, rx_pin, &config);
+	gpio_init(tx_port, tx_pin, &config);
 
 
 
 
 	return true;
-
 }
 
 void usart_transmitStr(USART_TypeDef *bus, uint8_t message[]) {
+
 }
 
 void usart_transmitBytes(USART_TypeDef *bus, uint8_t message[], int nbytes) {
+
 }
 
 bool usart_receiveBufferNotEmpty(USART_TypeDef *bus) {
-	return true;
+	return false;
 }
 
 int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size) {
@@ -35,49 +58,5 @@ int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size) {
 }
 
 void usart_flushrx(USART_TypeDef* bus) {
+
 }
-
-// TX = PC4-AF7 | RX = PC5-AF7
-static void usart1_gpio_init() {
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOCEN;
-
-	GPIOC->MODER &= ~(GPIO_MODER_MODE4_Msk | GPIO_MODER_MODE5_Msk);
-	GPIOC->MODER |= (GPIO_MODER_MODE4_1 | GPIO_MODER_MODE5_1);
-
-	GPIOC->AFR[0] &= ~(GPIO_AFRL_AFSEL4_Msk | GPIO_AFRL_AFSEL5_Msk);
-	GPIOC->AFR[0] |= ((GPIO_AFRX_AF7 << GPIO_AFRL_AFSEL4_Pos) | (GPIO_AFRX_AF7 << GPIO_AFRL_AFSEL5_Pos));
-}
-
-// TX = PA2-AF7 | RX = PA3-AF7
-static void usart2_gpio_init() {
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOAEN;
-
-	GPIOA->MODER &= ~(GPIO_MODER_MODE2_Msk | GPIO_MODER_MODE3_Msk);
-	GPIOA->MODER |= (GPIO_MODER_MODE2_1 | GPIO_MODER_MODE3_1);
-
-	GPIOA->AFR[0] &= ~(GPIO_AFRL_AFSEL2_Msk | GPIO_AFRL_AFSEL3_Msk);
-	GPIOA->AFR[0] |= ((GPIO_AFRX_AF7 << GPIO_AFRL_AFSEL2_Pos) | (GPIO_AFRX_AF7 << GPIO_AFRL_AFSEL3_Pos));
-}
-
-// TX = PB10-AF7 | PB11-AF7
-static void usart3_gpio_init() {
-	RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
-
-	GPIOB->MODER &= ~(GPIO_MODER_MODE10_Msk | GPIO_MODER_MODE11_Msk);
-	GPIOB->MODER |= (GPIO_MODER_MODE10_1 | GPIO_MODER_MODE11_1);
-
-	GPIOB->AFR[1] &= ~(GPIO_AFRH_AFSEL10_Msk | GPIO_AFRH_AFSEL11_Msk);
-	GPIOB->AFR[1] |= ((GPIO_AFRX_AF7 << GPIO_AFRH_AFSEL10_Pos) | (GPIO_AFRX_AF7 << GPIO_AFRH_AFSEL11_Pos));
-}
-
-static void uart4_gpio_init() {
-	return;
-}
-
-static void uart5_gpio_init() {
-	return;
-}
-
-static void lpuart1_gpio_init() {
-	return;
-};

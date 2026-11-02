@@ -3,12 +3,6 @@
 
 #include "stm32g474xx.h"
 
-#define GPIO_MODER_BIT_SPAN 4U
-#define GPIO_OSPEEDR_BIT_SPAN 2U
-#define GPIO_PUPDR_BIT_SPAN 2U
-#define GPIO_AFRX_BIT_SPAN 4U
-#define GPIO_AFRH_PIN_OFFSET 8U
-
 typedef enum {
 	GPIO_MODE_INPUT = 0,
 	GPIO_MODE_OUTPUT,
@@ -23,9 +17,9 @@ typedef enum {
 
 
 typedef enum {
-	GPIO_NOPULL = 0,
-	GPIO_PULLUP,
-	GPIO_PULLDOWN
+	GPIO_PULL_NOPULL = 0,
+	GPIO_PULL_PULLUP,
+	GPIO_PULL_PULLDOWN
 } gpio_pull_t;
 
 typedef enum {
@@ -84,25 +78,12 @@ typedef struct {
 	gpio_pull_t pull;
 	gpio_speed_t speed;
 	gpio_af_t alternate;
-} gpio_init_t;
-
-void gpio_init(GPIO_TypeDef *port, gpio_pin_t pin, const gpio_init_t *config);
-gpio_init_t gpio_create_config(
-		gpio_mode_t mode,
-		gpio_output_type_t output_type,
-		gpio_pull_t pull,
-		gpio_speed_t speed,
-		gpio_af_t af
-);
-void gpio_set_mode(GPIO_TypeDef *port, gpio_pin_t pin, gpio_mode_t mode);
-void gpio_set_output_type(GPIO_TypeDef *port, gpio_pin_t pin, gpio_output_type_t output_type);
-void gpio_set_output_speed(GPIO_TypeDef *port, gpio_pin_t pin, gpio_speed_t speed);
-void gpio_set_pull(GPIO_TypeDef *port, gpio_pin_t pin, gpio_pull_t pull_mode);
-void gpio_set_af(GPIO_TypeDef *port, gpio_pin_t pin, gpio_af_t af);
-void gpio_enable_clock(GPIO_TypeDef *port);
+} gpio_config_t;
 
 void gpio_write(GPIO_TypeDef *port, gpio_pin_t pin, gpio_state_t state);
 gpio_state_t gpio_read(GPIO_TypeDef *port, gpio_pin_t pin);
 void gpio_toggle(GPIO_TypeDef *port, gpio_pin_t pin);
+void gpio_init(GPIO_TypeDef *port, gpio_pin_t pin, const gpio_config_t *config);
+gpio_config_t gpio_getDefaultConfig(void);
 
 #endif
