@@ -6,8 +6,8 @@
 #include <stdint.h>
 
 bool usart_init(USART_TypeDef *bus, int baud_rate);
-void usart_transmitStr(USART_TypeDef *bus, uint8_t message[]);
-void usart_transmitBytes(USART_TypeDef *bus, uint8_t message[], int nbytes);
+void usart_writeString(USART_TypeDef *bus, uint8_t message[]);
+void usart_writeBytes(USART_TypeDef *bus, uint8_t message[], int nbytes);
 bool usart_receiveBufferNotEmpty(USART_TypeDef *bus);
 int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size);
 void usart_flushrx(USART_TypeDef* bus);

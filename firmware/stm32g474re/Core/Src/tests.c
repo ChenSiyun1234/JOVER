@@ -1,5 +1,5 @@
 #include "stm32g474xx.h"
-#include "gpio_tests.h"
+#include "tests.h"
 #include "gpio.h"
 #include "systick.h"
 
@@ -18,7 +18,6 @@ void gpio_test1(void){
 
     config = gpio_getDefaultConfig();
     config.mode = GPIO_MODE_INPUT;
-    config.pull = GPIO_PULL_PULLUP;
     gpio_init(GPIOC, BUTTON_PIN, &config);
 
     systick_init(1000);
@@ -41,6 +40,22 @@ void gpio_test1(void){
     		debounce_start_tick = systick_get_ticks();
     	}
     }
+}
+
+
+void gpio_test2(void) {
+	gpio_config_t config = gpio_getDefaultConfig();
+	config.mode = GPIO_MODE_OUTPUT;
+	gpio_init(GPIOA, LED_PIN, &config);
+
+	systick_init(1000);
+	while (1) {
+		gpio_write(GPIOA, LED_PIN, GPIO_STATE_HIGH);
+		systick_delay_ticks(500);
+		gpio_write(GPIOA, LED_PIN, GPIO_STATE_LOW);
+		systick_delay_ticks(500);
+	}
+
 }
 
 
