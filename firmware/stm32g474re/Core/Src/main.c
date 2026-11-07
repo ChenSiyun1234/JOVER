@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "GPIO/tests.h"
 #include "TestDefinition.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -132,8 +131,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  gpio_test1();
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
