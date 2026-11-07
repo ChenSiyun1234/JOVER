@@ -1,0 +1,6 @@
+../Core/Src/uart.c:4:6:usart_init	32	static
+../Core/Src/uart.c:47:6:usart_writeStr	16	static
+../Core/Src/uart.c:51:6:usart_writeBytes	24	static
+../Core/Src/uart.c:55:6:usart_receiveBufferNotEmpty	16	static
+../Core/Src/uart.c:59:5:usart_receiveBytes	24	static
+../Core/Src/uart.c:63:6:usart_flushrx	16	static

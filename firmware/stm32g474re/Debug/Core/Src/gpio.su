@@ -1,0 +1,11 @@
+../Core/Src/gpio.c:17:6:gpio_init	24	static
+../Core/Src/gpio.c:27:6:gpio_write	24	static
+../Core/Src/gpio.c:38:14:gpio_read	24	static
+../Core/Src/gpio.c:43:6:gpio_toggle	24	static
+../Core/Src/gpio.c:48:15:gpio_getDefaultConfig	24	static
+../Core/Src/gpio.c:58:13:gpio_setMode	24	static
+../Core/Src/gpio.c:63:13:gpio_setOutputType	24	static
+../Core/Src/gpio.c:68:13:gpio_setOutputSpeed	24	static
+../Core/Src/gpio.c:73:13:gpio_setPull	24	static
+../Core/Src/gpio.c:78:13:gpio_setAF	24	static
+../Core/Src/gpio.c:89:13:gpio_enableClock	16	static

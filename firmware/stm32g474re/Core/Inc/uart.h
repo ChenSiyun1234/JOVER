@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+<<<<<<< Updated upstream
 #define GPIO_AFRX_AF7 0b0111UL
 #define GPIO_AFRX_AF5 0b0101UL
 
@@ -16,10 +17,21 @@
  * @param baud_rate  The desired Baud Rate of the UART system
  *
  * @returns None
+=======
+/*
+ * Initializes the UART hardware to conduct UART communication with
+ * 1 start bit, 8 data bits, 1 stop bit, no parity bit.
+ *
+ * @param bus        The USART bus that needs initialization
+ * @param baud_rate  The desired baud rate
+ *
+ * @returns The initialization status (true = success | false = failure)
+>>>>>>> Stashed changes
  */
 bool usart_init(USART_TypeDef *bus, int baud_rate);
 
 /*
+<<<<<<< Updated upstream
  * Utilizes USART hardware transmitter to send a variable length string
  *
  * @param bus       The USART Bus doing the transmission
@@ -58,6 +70,39 @@ bool usart_receiveBufferNotEmpty(USART_TypeDef *bus);
  *
  * @returns			The number of bytes actually received and stored ( <= `size`)
  */
+=======
+ * Transmits a string using the target USART bus
+ *
+ * @param bus The transmitting USART bus
+ * @param msg The string to be transmitted
+ *
+ * @details
+ * This is a blocking operation. After sending the last char
+ * to the transmit data register, it waits for transmission
+ * to complete before returning.
+ */
+void usart_transmitString(USART_TypeDef *bus, const char *msg);
+
+/*
+ * Transmits an array of bytes using the target USART bus
+ *
+ * @param bus    The transmitting USART bus
+ * @param bytes  The array of bytes to be transmitted
+ * @param nbytes The number of bytes to be transmitted
+ *
+ * @details
+ * This is a blocking operation. After sending the last byte
+ * to the transmit data register, it waits for transmission
+ * to complete before returning.
+ */
+void usart_transmitBytes(USART_TypeDef *bus, uint8_t bytes[], int nbytes);
+
+
+bool usart_receiveBufferNotEmpty(USART_TypeDef *bus);
+
+
+
+>>>>>>> Stashed changes
 int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size);
 
 /*
