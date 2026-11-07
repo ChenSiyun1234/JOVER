@@ -19,36 +19,12 @@ TestStatus testFunction_Nothing() {
 	return status;
 };
 
-TestStatus testOne() {
-	TestStatus status = PASS;
-	return status;
-};
-
-TestStatus testTwo() {
-	TestStatus status = FAIL;
-	return status;
-};
-
-TestStatus testThree() {
-	TestStatus status = PASS;
-	return status;
-};
-
-TestStatus testFour() {
-	TestStatus status = NEEDS_VERIFICATION;
-	return status;
-};
-
 // extern TestStatus yourTestNameHere();
 
 
 // array with pointers to all tests
 TestStatus (*all_tests[])() = {
 		testFunction_Nothing,
-		testOne,
-		testTwo,
-		testThree,
-		testFour
 };
 
 
@@ -63,15 +39,6 @@ TestStatus (*getTestFunction(int test_id))() {
 	switch(test_id){
 		case 0:
 			return testFunction_Nothing;
-		case 1:
-			return testOne;
-		case 2:
-			return testTwo;
-		case 3:
-			return testThree;
-		case 4:
-			return testFour;
-
 	}
 	return testFunction_Nothing;
 }
