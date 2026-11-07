@@ -1,6 +1,8 @@
 #include "uart.h"
 
-bool usart_init(USART_TypeDef *bus, int baud_rate) {
+static void usart_transmitByte(USART_TypeDef *bus, uint8_t byte);
+
+bool usart_init(USART_TypeDef *bus, uint32_t baud_rate) {
 	GPIO_TypeDef *rx_port;
 	GPIO_TypeDef *tx_port;
 	gpio_pin_t rx_pin;
@@ -37,19 +39,36 @@ bool usart_init(USART_TypeDef *bus, int baud_rate) {
 	gpio_init(rx_port, rx_pin, &config);
 	gpio_init(tx_port, tx_pin, &config);
 
-	bus->CR1 = USART_CR1_TE | USART_CR1_RE;
+	SystemCoreClockUpdate();
+	uint32_t usart_div = (SystemCoreClock + (baud_rate / 2)) / baud_rate;
+
+	// 1 start bit, 8 data bits
+	bus->CR1 &= ~(USART_CR1_M0_Msk | USART_CR1_M1_Msk);
+	// Set baud rate
+	bus->BRR = usart_div;
+	// 1 stop bit
+	bus->CR2 &= ~USART_CR2_STOP_Msk;
+	// Enable USART
 	bus->CR1 |= USART_CR1_UE;
+	// Enable transmitter and receiver
+	bus->CR1 |= USART_CR1_TE | USART_CR1_RE;
 
 	return true;
 }
 
-void usart_writeStr(USART_TypeDef *bus, uint8_t message[]) {
-
+void usart_transmitBytes(USART_TypeDef *bus, const uint8_t msg[], int nbytes) {
+	for (int i = 0; i < nbytes; i++) {
+		usart_transmitByte(bus, msg[i]);
+	}
+	while (!(bus->ISR & USART_ISR_TC)) {}
 }
 
-void usart_writeBytes(USART_TypeDef *bus, uint8_t message[], int nbytes) {
+void usart_transmitStr(USART_TypeDef *bus, const char *msg) {
+	for (const char *p = msg; *p != '\0'; p++) {
+		usart_transmitByte(bus, (uint8_t)*p);
+	}
+	while (!(bus->ISR & USART_ISR_TC)) {}
 
-}
 
 bool usart_receiveBufferNotEmpty(USART_TypeDef *bus) {
 	return false;
@@ -61,4 +80,9 @@ int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size) {
 
 void usart_flushrx(USART_TypeDef* bus) {
 
+}
+
+static void usart_transmitByte(USART_TypeDef *bus, uint8_t byte) {
+	while (!(bus->ISR & USART_ISR_TXE)) {}
+	bus->TDR = byte;
 }
