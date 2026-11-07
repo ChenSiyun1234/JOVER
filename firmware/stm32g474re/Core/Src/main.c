@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "TestDefinition.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -63,6 +64,11 @@ static void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+
+#define RUN_TEST	    1	// 0 = run JOVER, 1 = run a very specific test, 2 = run all tests
+#define TEST_ID 	    1	// ID of the test to run in case RUN_TEST = 1
+
+
 int main(void)
 {
 
@@ -109,11 +115,22 @@ int main(void)
     Error_Handler();
   }
 
+  // Run a specific test, all the tests, or main proper
+	#if (RUN_TEST==1) && (TEST_ID != 0)
+		TestStatus (*testFunc)();
+		testFunc = getTestFunction(TEST_ID);
+		TestStatus result = testFunc();
+	#elif (RUN_TEST == 2)
+		TestStatus results[sizeof(all_tests) / sizeof(all_tests[0])];
+		runAllTests(results);
+	#else
+		// actually run main if no tests are being run
+	#endif
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
