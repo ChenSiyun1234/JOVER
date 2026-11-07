@@ -4,6 +4,8 @@
 #include "stm32g474xx.h"
 #include <stdbool.h>
 #include <stdint.h>
+#include "GPIO/gpio.h"
+
 
 bool usart_init(USART_TypeDef *bus, int baud_rate);
 void usart_writeString(USART_TypeDef *bus, uint8_t message[]);

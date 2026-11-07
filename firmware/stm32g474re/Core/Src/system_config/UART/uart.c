@@ -1,5 +1,4 @@
 #include "uart.h"
-#include "gpio.h"
 
 bool usart_init(USART_TypeDef *bus, int baud_rate) {
 	GPIO_TypeDef *rx_port;
