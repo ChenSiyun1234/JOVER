@@ -6,41 +6,39 @@
 #include <stdint.h>
 #include "GPIO/gpio.h"
 
+
 /*
  * Initializes the UART hardware to conduct UART communication with
  * 1 start bit, 8 data bits, 1 stop bit, no parity bit.
  *
- * @param bus        The USART bus that needs initialization
+ * @param uart       The USART device that needs initialization
  * @param baud_rate  The desired baud rate
  *
  * @returns The initialization status (true = success | false = failure)
  */
-bool usart_init(USART_TypeDef *bus, int baud_rate);
+bool usart_init(USART_TypeDef *uart, int baud_rate);
 
 /*
- * Utilizes USART hardware transmitter to send a variable length string
+ * Transmit a null-terminated string via UART
  *
- * @param bus       The USART Bus doing the transmission
- * @param message   The string (character array) being sent
+ * @param uart The USART device doing the transmission
+ * @param msg The string being transmitted
  *
- * @returns None
+ * @note This is a blocking operation
  */
-void usart_transmitStr(USART_TypeDef *bus, uint8_t message[]);
+void usart_transmitStr(USART_TypeDef *uart, const char *msg);
 
 /*
- * Utilizes USART hardware transmitter to send a fixed length byte stream
+ * Transmit n-number of bytes via UART
  *
- * @param bus       The USART Bus doing the transmission
- * @param message   The string (character array) being sent
+ * @param uart      The USART device doing the transmission
+ * @param message  The array of bytes being transmitted
+ * @param nbytes   The number of bytes being transmitted
  *
- * @returns None
+ * @note This is a blocking operation
  */
-void usart_transmitBytes(USART_TypeDef *bus, uint8_t message[], int nbytes);
-
-bool usart_receiveBufferNotEmpty(USART_TypeDef *bus);
+void usart_transmitBytes(USART_TypeDef *uart, uint8_t msg[], int nbytes);
 
 int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size);
-
-void usart_flushrx(USART_TypeDef* bus);
 
 #endif

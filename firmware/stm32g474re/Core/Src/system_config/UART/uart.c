@@ -14,9 +14,10 @@ static USART_RecieverBuffer usart1_rx_buffer;
 static USART_RecieverBuffer usart2_rx_buffer;
 static USART_RecieverBuffer usart3_rx_buffer;
 
-static void rx_buffer_push(USART_RecieverBuffer *rx_buf, uint8_t data);
-static uint8_t rx_buffer_pop(USART_RecieverBuffer *rx_buf, uint8_t data);
-static USART_RecieverBuffer *get_rx_buffer(USART_TypeDef *uart);
+static void rx_bufferPush(USART_RecieverBuffer *rx_buf, uint8_t data);
+static uint8_t rx_bufferPop(USART_RecieverBuffer *rx_buf, uint8_t data);
+static bool rx_bufferIsEmpty(USART_RecieverBuffer *rx_buf);
+static USART_RecieverBuffer *rx_bufferFlush(USART_TypeDef *uart);
 static void usart_transmitByte(USART_TypeDef *uart, uint8_t byte);
 
 bool usart_init(USART_TypeDef *uart, uint32_t baud_rate) {
@@ -87,38 +88,40 @@ void usart_transmitStr(USART_TypeDef *uart, const char *msg) {
 	while (!(uart->ISR & USART_ISR_TC)) {}
 
 
-bool usart_receiveBufferNotEmpty(USART_TypeDef *uart) {
-	return false;
-}
-
 int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], uint16_t size) {
 
 	return 0;
 }
 
-void usart_flushrx(USART_TypeDef* uart) {
-
-}
 
 static void usart_transmitByte(USART_TypeDef *uart, uint8_t byte) {
 	while (!(uart->ISR & USART_ISR_TXE)) {}
 	uart->TDR = byte;
 }
 
-static void rx_buffer_push(USART_RecieverBuffer *rx_buf, uint8_t data) {
+static void rx_bufferPush(USART_RecieverBuffer *rx_buf, uint8_t data) {
 	rx_buf->buf[rx_buf->head] = data;
 	rx_buf->head = (rx_buf->head + 1) % RX_BUF_CAP;
 }
 
 
-static uint8_t rx_buffer_pop(USART_RecieverBuffer *rx_buf) {
+static uint8_t rx_bufferPop(USART_RecieverBuffer *rx_buf) {
 	uint8_t data = rx_buf->buf[rx_buf->tail];
 	rx_buf->tail = (rx_buf->tail + 1) % RX_BUF_CAP;
 
 	return data;
 }
 
-static USART_RecieverBuffer *get_rx_buffer(USART_TypeDef *uart) {
+
+static bool rx_bufferIsEmpty(USART_RecieverBuffer *rx_buf) {
+	return true;
+}
+
+static void rx_bufferFlush(USART_RecieverBuffer *rx_buf) {
+	return;
+}
+
+static USART_RecieverBuffer *rx_bufferGet(USART_TypeDef *uart) {
 	if (uart == USART1) {
 		return &usart1_rx_buffer;
 	} else if (uart == USART2) {
@@ -129,5 +132,3 @@ static USART_RecieverBuffer *get_rx_buffer(USART_TypeDef *uart) {
 
 	return NULL;
 }
-
-
