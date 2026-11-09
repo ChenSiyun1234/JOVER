@@ -76,11 +76,11 @@ TestStatus testFunction_UART_TX_External() {
 	usart_transmitBytes(USART1, bytes, 10);
 
 	const char *msg = "we're BARACK";
-	usart_transmitString(uart, msg);
+	usart_transmitString(USART1, msg);
 
 	return NEEDS_VERIFICATION;
 }
 
 TestStatus testFunction_UART_RX_External() {
-
+	return FAIL;
 }

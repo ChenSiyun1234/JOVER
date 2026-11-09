@@ -10,6 +10,8 @@
  *
  * Configures the desired USART peripheral using the supplied baud rate.
  * Uses 8N1 configuration (1 start bit, 8 data bits, no parity bit, 1 stop bit).
+ * Assumes USART will use the CPU clock frequency (no prescalers).
+ * Look at pin-out for specific RX/TX pins.
  *
  * @param uart       USART peripheral to initialize.
  * @param baud_rate  Communication speed in bps (bits/sec).
@@ -36,17 +38,17 @@ void usart_transmitString(USART_TypeDef *uart, const char *msg);
  * Blocks until all bytes have been transmitted.
  *
  * @param uart     USART peripheral to use.
- * @param data     Buffer containing the bytes to transmit.
+ * @param bytes    Array containing the bytes to transmit.
  * @param nbytes   Number of bytes to transmit.
  *
- * @note Assumes nbytes > length of data buffer.
+ * @note Assumes nbytes <= size of bytes
  */
 void usart_transmitBytes(USART_TypeDef *uart, const uint8_t bytes[], int nbytes);
 
 /*
  * @brief Receive bytes over UART.
  *
- * Reads bytes from an internal receive buffer and stores those
+ * Reads bytes from an internal RX buffer and stores those
  * bytes inside the input buffer. This is a non-blocking operation.
  *
  * @param uart    USART peripheral to use.
@@ -55,14 +57,14 @@ void usart_transmitBytes(USART_TypeDef *uart, const uint8_t bytes[], int nbytes)
  *
  * @return Number of bytes read.
  *
- * @note User should check nbytes vs number of bytes actually read.
+ * @note User should check nbytes vs return value.
  */
 int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], int nbytes);
 
 /*
- * @brief Check if the internal receive buffer is full.
+ * @brief Check if the internal RX buffer is full.
  *
- * Total capacity of the rx buffer is (RX_CAP - 1).
+ * Total capacity of the RX buffer is (RX_CAP - 1).
  * One slot is reserved to check if the buffer is full.
  *
  * @param uart USART peripheral to check.
@@ -70,6 +72,7 @@ int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], int nbytes);
  * @return true if receive buffer is full, otherwise false.
  *
  * @note returns true if an invalid uart handle is used.
+ * @note Bytes are discarded if HW FIFO or internal RX buffer is overrun.
  */
 bool usart_rxIsFull(USART_TypeDef *uart);
 
@@ -80,7 +83,7 @@ bool usart_rxIsFull(USART_TypeDef *uart);
  *
  * @return true if receive buffer is empty, otherwise false.
  *
- * @note returns false if an invalid uart handle is used.
+ * @note returns true if an invalid uart handle is used.
  */
 bool usart_rxIsEmpty(USART_TypeDef *uart);
 

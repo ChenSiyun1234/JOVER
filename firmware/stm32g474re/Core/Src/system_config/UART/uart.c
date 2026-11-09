@@ -9,23 +9,28 @@
 
 typedef struct {
 	uint8_t buf[RX_CAP];
-	uint32_t head;
-	uint32_t tail;
+	volatile uint32_t head;
+	volatile uint32_t tail;
 } USART_RecieverBuffer;
 
 static USART_RecieverBuffer usart1_rx;
 static USART_RecieverBuffer usart2_rx;
 static USART_RecieverBuffer usart3_rx;
 
-static void usart_rxPush(USART_RecieverBuffer *rx, uint8_t data);
-static uint8_t usart_rxPop(USART_RecieverBuffer *rx);
+static bool usart_rxPush(USART_RecieverBuffer *rx, uint8_t data);
+static bool usart_rxPop(USART_RecieverBuffer *rx, uint8_t *data_buffer);
 static USART_RecieverBuffer * usart_rxGet(USART_TypeDef *uart);
 
 bool usart_init(USART_TypeDef *uart, int baud_rate) {
+	if (baud_rate <= 0) {
+		return false;
+	}
+
 	GPIO_TypeDef *rx_port;
 	GPIO_TypeDef *tx_port;
 	gpio_pin_t rx_pin;
 	gpio_pin_t tx_pin;
+	IRQn_Type irq;
 
 	// USART1_RX = PA10 | USART1_TX = PA9
 	if (uart == USART1) {
@@ -33,27 +38,32 @@ bool usart_init(USART_TypeDef *uart, int baud_rate) {
 		tx_port = GPIOA;
 		rx_pin = GPIO_PIN_10;
 		tx_pin = GPIO_PIN_9;
+		irq = USART1_IRQn;
 		RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-		NVIC_EnableIRQ(USART1_IRQn);
 	// USART2_RX = PD6 | USART2_TX = PD5
 	} else if (uart == USART2) {
 		rx_port = GPIOD;
 		tx_port = GPIOD;
 		rx_pin = GPIO_PIN_6;
 		tx_pin = GPIO_PIN_5;
+		irq = USART2_IRQn;
 		RCC->APB1ENR1 |= RCC_APB1ENR1_USART2EN;
-		NVIC_EnableIRQ(USART2_IRQn);
 	// USART3_RX = PC11 | USART3_TX = PC10
 	} else if (uart == USART3) {
 		rx_port = GPIOC;
 		tx_port = GPIOC;
 		rx_pin = GPIO_PIN_11;
 		tx_pin = GPIO_PIN_10;
+		irq = USART3_IRQn;
 		RCC->APB1ENR1 |= RCC_APB1ENR1_USART3EN;
-		NVIC_EnableIRQ(USART3_IRQn);
 	} else {
 		return false;
 	}
+
+	// Disable UART before configuration (in case of re-initialization)
+	NVIC_DisableIRQ(irq);
+	uart->CR1 &= ~USART_CR1_RXNEIE;
+	uart->CR1 &= ~USART_CR1_UE;
 
 	gpio_config_t config = gpio_getDefaultConfig();
 	config.alternate = GPIO_AF_7;
@@ -61,26 +71,35 @@ bool usart_init(USART_TypeDef *uart, int baud_rate) {
 	gpio_init(rx_port, rx_pin, &config);
 	gpio_init(tx_port, tx_pin, &config);
 
+	// Configure 8N1 and HW FIFO
+	uart->CR1 &= ~(USART_CR1_M0
+			     | USART_CR1_M1
+				 | USART_CR1_PCE
+				 | USART_CR1_OVER8);
+	uart->CR2 &= ~USART_CR2_STOP_Msk;
+	uart->CR1 |= USART_CR1_FIFOEN;
+
+	// Assumes USART is using the CPU clock with no prescalers
+	// TODO: if this changes in the future, need to make this code
+	//       more robust
 	SystemCoreClockUpdate();
 	uint32_t usart_div = (SystemCoreClock + (baud_rate / 2)) / baud_rate;
-
-	// 1 start bit, 8 data bits
-	uart->CR1 &= ~(USART_CR1_M0_Msk | USART_CR1_M1_Msk);
-	// Set baud rate
 	uart->BRR = usart_div;
-	// 1 stop bit
-	uart->CR2 &= ~USART_CR2_STOP_Msk;
 
-	// Enable hardware RXFIFO and interrupt
-	uart->CR1 |= USART_CR1_FIFOEN;
-	uart->CR1 |= USART_CR1_RXNEIE;
-
-	// Enable USART
-	uart->CR1 |= USART_CR1_UE;
-	// Enable transmitter and receiver
-	uart->CR1 |= USART_CR1_TE | USART_CR1_RE;
-
+	// Clear any stale data in HW FIFO and RX buffer
+	uart->RQR = USART_RQR_RXFRQ;
+	uart->ICR = USART_ICR_ORECF
+	          | USART_ICR_FECF
+	          | USART_ICR_NECF
+	          | USART_ICR_PECF;
 	usart_rxFlush(uart);
+
+	// Enable UART after configuration
+	uart->CR1 |= USART_CR1_TE | USART_CR1_RE;
+	uart->CR1 |= USART_CR1_UE;
+	uart->CR1 |= USART_CR1_RXNEIE;
+	NVIC_ClearPendingIRQ(irq);
+	NVIC_EnableIRQ(irq);
 
 	return true;
 }
@@ -98,7 +117,7 @@ void usart_transmitString(USART_TypeDef *uart, const char *msg) {
 void usart_transmitBytes(USART_TypeDef *uart, const uint8_t bytes[], int nbytes) {
 	for (int i = 0; i < nbytes; i++) {
 		while (!(uart->ISR & USART_ISR_TXE)) {}
-		uart->TDR = msg[i];
+		uart->TDR = bytes[i];
 	}
 	while (!(uart->ISR & USART_ISR_TC)) {}
 }
@@ -110,11 +129,14 @@ int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], int nbytes) {
 	}
 
 	int read_count = 0;
-	while (!usart_rxIsEmpty(uart) && read_count < nbytes) {
-		buffer[read_count++] = usart_rxPop(rx);
+	while (read_count < nbytes) {
+		if (!usart_rxPop(rx, &buffer[read_count])) {
+			return read_count;
+		}
+		read_count++;
 	}
 
-	return read_count;
+	return nbytes;
 }
 
 bool usart_rxIsFull(USART_TypeDef *uart) {
@@ -129,7 +151,7 @@ bool usart_rxIsFull(USART_TypeDef *uart) {
 bool usart_rxIsEmpty(USART_TypeDef *uart) {
 	USART_RecieverBuffer *rx = usart_rxGet(uart);
 	if (rx == NULL) {
-		return false;
+		return true;
 	}
 
 	return rx->head == rx->tail;
@@ -144,16 +166,27 @@ void usart_rxFlush(USART_TypeDef *uart) {
 	rx->head = rx->tail;
 }
 
-static void usart_rxPush(USART_RecieverBuffer *rx, uint8_t data) {
+static bool usart_rxPush(USART_RecieverBuffer *rx, uint8_t data) {
+	uint32_t next = (rx->head + 1) % RX_CAP;
+	if (next == rx->tail) {
+		return false;
+	}
+
 	rx->buf[rx->head] = data;
-	rx->head = (rx->head + 1) % RX_CAP;
+	rx->head = next;
+
+	return true;
 }
 
-static uint8_t usart_rxPop(USART_RecieverBuffer *rx) {
-	uint8_t data = rx->buf[rx->tail];
+static bool usart_rxPop(USART_RecieverBuffer *rx, uint8_t *data_buffer) {
+	if (rx->head == rx->tail) {
+		return false;
+	}
+
+	*data_buffer = rx->buf[rx->tail];
 	rx->tail = (rx->tail + 1) % RX_CAP;
 
-	return data;
+	return true;
 }
 
 static USART_RecieverBuffer * usart_rxGet(USART_TypeDef *uart) {
@@ -171,60 +204,48 @@ static USART_RecieverBuffer * usart_rxGet(USART_TypeDef *uart) {
 
 void USART1_IRQHandler() {
 	if (USART1->ISR & USART_ISR_ORE) {
-		USART1->ICR |= USART_ICR_ORECF;
+		USART1->ICR = USART_ICR_ORECF;
 		// TODO: handle hw fifo overruns in the future
 		// For now, we just clear the overrun flag
 		// The hardware discards incoming bytes
 	}
 
-	uint8_t data;
 	while (USART1->ISR & USART_ISR_RXNE_RXFNE) {
-		data = USART1->RDR;
-		if (usart_rxIsFull(USART1)) {
+		if (!usart_rxPush(&usart1_rx, (uint8_t)USART1->RDR)) {
 			// TODO: handle rx buffer overruns in the future
 			// For now, we just discard incoming bytes
-		} else {
-			usart_rxPush(&usart1_rx, data);
 		}
 	}
 }
 
 void USART2_IRQHandler() {
 	if (USART2->ISR & USART_ISR_ORE) {
-		USART2->ICR |= USART_ICR_ORECF;
+		USART2->ICR = USART_ICR_ORECF;
 		// TODO: handle hw fifo overruns in the future
 		// For now, we just clear the overrun flag
 		// The hardware discards incoming bytes
 	}
 
-	uint8_t data;
 	while (USART2->ISR & USART_ISR_RXNE_RXFNE) {
-		data = USART2->RDR;
-		if (usart_rxIsFull(USART2)) {
+		if (!usart_rxPush(&usart2_rx, (uint8_t)USART2->RDR)) {
 			// TODO: handle rx buffer overruns in the future
 			// For now, we just discard incoming bytes
-		} else {
-			usart_rxPush(&usart2_rx, data);
 		}
 	}
 }
 
 void USART3_IRQHandler() {
 	if (USART3->ISR & USART_ISR_ORE) {
-		USART3->ICR |= USART_ICR_ORECF;
+		USART3->ICR = USART_ICR_ORECF;
 		// TODO: handle hw fifo overruns in the future
 		// For now, we just clear the overrun flag
 		// The hardware discards incoming bytes
 	}
 
-	uint8_t data;
 	while (USART3->ISR & USART_ISR_RXNE_RXFNE) {
-		data = USART3->RDR;
-		if (usart_rxIsFull(USART3)) {
+		if (!usart_rxPush(&usart3_rx, (uint8_t)USART3->RDR)) {
 			// TODO: handle rx buffer overruns in the future
 			// For now, we just discard incoming bytes
-		} else {
-			usart_rxPush(&usart3_rx, data);
 		}
 	}
 }
