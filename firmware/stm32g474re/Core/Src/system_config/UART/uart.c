@@ -80,19 +80,22 @@ bool usart_init(USART_TypeDef *uart, int baud_rate) {
 	// Enable transmitter and receiver
 	uart->CR1 |= USART_CR1_TE | USART_CR1_RE;
 
+	usart_rxFlush(uart);
+
 	return true;
 }
 
-void usart_transmitStr(USART_TypeDef *uart, const char *msg) {
+void usart_transmitString(USART_TypeDef *uart, const char *msg) {
 	for (const char *p = msg; *p != '\0'; p++) {
 		while (!(uart->ISR & USART_ISR_TXE)) {}
 		uart->TDR = (uint8_t)*p;
 	}
+
 	while (!(uart->ISR & USART_ISR_TC)) {}
 }
 
 
-void usart_transmitBytes(USART_TypeDef *uart, const uint8_t msg[], int nbytes) {
+void usart_transmitBytes(USART_TypeDef *uart, const uint8_t bytes[], int nbytes) {
 	for (int i = 0; i < nbytes; i++) {
 		while (!(uart->ISR & USART_ISR_TXE)) {}
 		uart->TDR = msg[i];

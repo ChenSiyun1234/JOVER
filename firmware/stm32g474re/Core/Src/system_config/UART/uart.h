@@ -28,7 +28,7 @@ bool usart_init(USART_TypeDef *uart, int baud_rate);
  *
  * @note Assumes the string is null-terminated.
  */
-void usart_transmitStr(USART_TypeDef *uart, const char *msg);
+void usart_transmitString(USART_TypeDef *uart, const char *msg);
 
 /*
  * @brief Transmits an array of bytes over UART.
@@ -41,7 +41,7 @@ void usart_transmitStr(USART_TypeDef *uart, const char *msg);
  *
  * @note Assumes nbytes > length of data buffer.
  */
-void usart_transmitBytes(USART_TypeDef *uart, const uint8_t data[], int nbytes);
+void usart_transmitBytes(USART_TypeDef *uart, const uint8_t bytes[], int nbytes);
 
 /*
  * @brief Receive bytes over UART.
