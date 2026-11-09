@@ -1,44 +1,60 @@
-#ifndef UART_H
-#define UART_H
+#pragma once
 
 #include "stm32g474xx.h"
 #include <stdbool.h>
 #include <stdint.h>
-#include "GPIO/gpio.h"
 
 
 /*
- * Initializes the UART hardware to conduct UART communication with
- * 1 start bit, 8 data bits, 1 stop bit, no parity bit.
+ * @brief Initializes a USART peripheral.
  *
- * @param uart       The USART device that needs initialization
- * @param baud_rate  The desired baud rate
+ * Configures the desired USART peripheral using the supplied baud rate.
+ * Uses 8N1 configuration (1 start bit, 8 data bits, no parity bit, 1 stop bit).
  *
- * @returns The initialization status (true = success | false = failure)
+ * @param uart       USART peripheral to initialize.
+ * @param baud_rate  Communication speed in bps (bits/sec).
+ *
+ * @returns true if initialization was successful, false otherwise.
  */
 bool usart_init(USART_TypeDef *uart, int baud_rate);
 
 /*
- * Transmit a null-terminated string via UART
+ * @brief Transmits a null-terminated string over UART.
  *
- * @param uart The USART device doing the transmission
- * @param msg The string being transmitted
+ * Blocks until all characters have been transmitted.
  *
- * @note This is a blocking operation
+ * @param uart USART peripheral to use.
+ * @param msg  String to transmit.
+ *
+ * @note Assumes the string is null-terminated.
  */
 void usart_transmitStr(USART_TypeDef *uart, const char *msg);
 
 /*
- * Transmit n-number of bytes via UART
+ * @brief Transmits an array of bytes over UART.
  *
- * @param uart      The USART device doing the transmission
- * @param message  The array of bytes being transmitted
- * @param nbytes   The number of bytes being transmitted
+ * Blocks until all bytes have been transmitted.
  *
- * @note This is a blocking operation
+ * @param uart     USART peripheral to use.
+ * @param data     Buffer containing the bytes to transmit.
+ * @param nbytes   Number of bytes to transmit.
+ *
+ * @note Assumes nbytes > length of data buffer.
  */
-void usart_transmitBytes(USART_TypeDef *uart, uint8_t msg[], int nbytes);
+void usart_transmitBytes(USART_TypeDef *uart, const uint8_t data[], int nbytes);
 
-int usart_receiveBytes(USART_TypeDef *bus, uint8_t buffer[], uint16_t size);
-
-#endif
+/*
+ * @brief Receive bytes over UART.
+ *
+ * Reads bytes from an internal receive buffer and stores those
+ * bytes inside the input buffer. This is a non-blocking operation.
+ *
+ * @param uart    USART peripheral to use.
+ * @param buffer  Buffer to store the received bytes.
+ * @param nbytes  Number of bytes to read.
+ *
+ * @return Number of bytes read.
+ *
+ * @note User should check nbytes vs number of bytes actually read.
+ */
+int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], int nbytes);

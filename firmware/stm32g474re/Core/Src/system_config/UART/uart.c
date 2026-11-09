@@ -1,5 +1,8 @@
-#include "uart.h"
+#include "UART/uart.h"
+#include "GPIO/gpio.h"
 
+#include <stdint.h>
+#include <stdbool.h>
 #include <stddef.h>
 
 #define RX_BUF_CAP 128
@@ -15,12 +18,12 @@ static USART_RecieverBuffer usart2_rx_buffer;
 static USART_RecieverBuffer usart3_rx_buffer;
 
 static void rx_bufferPush(USART_RecieverBuffer *rx_buf, uint8_t data);
-static uint8_t rx_bufferPop(USART_RecieverBuffer *rx_buf, uint8_t data);
+static uint8_t rx_bufferPop(USART_RecieverBuffer *rx_buf);
 static bool rx_bufferIsEmpty(USART_RecieverBuffer *rx_buf);
 static USART_RecieverBuffer *rx_bufferFlush(USART_TypeDef *uart);
 static void usart_transmitByte(USART_TypeDef *uart, uint8_t byte);
 
-bool usart_init(USART_TypeDef *uart, uint32_t baud_rate) {
+bool usart_init(USART_TypeDef *uart, int baud_rate) {
 	GPIO_TypeDef *rx_port;
 	GPIO_TypeDef *tx_port;
 	gpio_pin_t rx_pin;
@@ -74,6 +77,13 @@ bool usart_init(USART_TypeDef *uart, uint32_t baud_rate) {
 	return true;
 }
 
+void usart_transmitStr(USART_TypeDef *uart, const char *msg) {
+	for (const char *p = msg; *p != '\0'; p++) {
+		usart_transmitByte(bus, (uint8_t)*p);
+	}
+	while (!(uart->ISR & USART_ISR_TC)) {}
+}
+
 void usart_transmitBytes(USART_TypeDef *uart, const uint8_t msg[], int nbytes) {
 	for (int i = 0; i < nbytes; i++) {
 		usart_transmitByte(bus, msg[i]);
@@ -81,15 +91,7 @@ void usart_transmitBytes(USART_TypeDef *uart, const uint8_t msg[], int nbytes) {
 	while (!(uart->ISR & USART_ISR_TC)) {}
 }
 
-void usart_transmitStr(USART_TypeDef *uart, const char *msg) {
-	for (const char *p = msg; *p != '\0'; p++) {
-		usart_transmitByte(bus, (uint8_t)*p);
-	}
-	while (!(uart->ISR & USART_ISR_TC)) {}
-
-
-int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], uint16_t size) {
-
+int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], int nbytes) {
 	return 0;
 }
 
