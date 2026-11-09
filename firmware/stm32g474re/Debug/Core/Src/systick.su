@@ -1,5 +1,0 @@
-../Core/Src/systick.c:7:6:SysTick_Handler	4	static
-../Core/Src/systick.c:11:6:systick_init	24	static
-../Core/Src/systick.c:37:10:systick_get_ticks	4	static
-../Core/Src/systick.c:41:10:systick_elapsed_ticks	16	static
-../Core/Src/systick.c:45:6:systick_delay_ticks	24	static

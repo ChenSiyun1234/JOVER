@@ -1,4 +1,7 @@
-../Core/Src/main.c:67:5:main	8	static
-../Core/Src/main.c:130:6:SystemClock_Config	88	static
-../Core/Src/main.c:177:13:MX_GPIO_Init	24	static
-../Core/Src/main.c:202:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Inc/TestDefinition.h:17:12:testFunction_Nothing	16	static
+../Core/Inc/TestDefinition.h:37:14:getTestFunction	16	static
+../Core/Inc/TestDefinition.h:46:6:runAllTests	40	static
+../Core/Src/main.c:72:5:main	16	static
+../Core/Src/main.c:145:6:SystemClock_Config	88	static
+../Core/Src/main.c:192:13:MX_GPIO_Init	24	static
+../Core/Src/main.c:217:6:Error_Handler	4	static,ignoring_inline_asm

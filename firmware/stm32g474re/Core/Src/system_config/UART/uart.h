@@ -58,3 +58,37 @@ void usart_transmitBytes(USART_TypeDef *uart, const uint8_t data[], int nbytes);
  * @note User should check nbytes vs number of bytes actually read.
  */
 int usart_receiveBytes(USART_TypeDef *uart, uint8_t buffer[], int nbytes);
+
+/*
+ * @brief Check if the internal receive buffer is full.
+ *
+ * Total capacity of the rx buffer is (RX_CAP - 1).
+ * One slot is reserved to check if the buffer is full.
+ *
+ * @param uart USART peripheral to check.
+ *
+ * @return true if receive buffer is full, otherwise false.
+ *
+ * @note returns true if an invalid uart handle is used.
+ */
+bool usart_rxIsFull(USART_TypeDef *uart);
+
+/*
+ * @brief Check if the internal receive buffer is empty.
+ *
+ * @param uart USART peripheral to check.
+ *
+ * @return true if receive buffer is empty, otherwise false.
+ *
+ * @note returns false if an invalid uart handle is used.
+ */
+bool usart_rxIsEmpty(USART_TypeDef *uart);
+
+/*
+ * @brief Flush the internal receive buffer.
+ *
+ * @param uart USART peripheral to target.
+ *
+ * @note returns without flushing if an invalid uart handle is used.
+ */
+void usart_rxFlush(USART_TypeDef *uart);
