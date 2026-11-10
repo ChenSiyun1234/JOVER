@@ -65,8 +65,8 @@ static void MX_GPIO_Init(void);
   * @retval int
   */
 
-#define RUN_TEST	    1	// 0 = run JOVER, 1 = run a very specific test, 2 = run all tests
-#define TEST_ID 	    1	// ID of the test to run in case RUN_TEST = 1
+#define RUN_TEST	    0	// 0 = run JOVER, 1 = run a very specific test, 2 = run all tests
+#define TEST_ID 	    0	// ID of the test to run in case RUN_TEST = 1
 
 
 int main(void)
@@ -115,6 +115,7 @@ int main(void)
     Error_Handler();
   }
 
+
   // Run a specific test, all the tests, or main proper
 	#if (RUN_TEST==1) && (TEST_ID != 0)
 		TestStatus (*testFunc)();
@@ -127,11 +128,17 @@ int main(void)
 		// actually run main if no tests are being run
 	#endif
 
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
+
+
+
     /* USER CODE END WHILE */
+
 
     /* USER CODE BEGIN 3 */
   }

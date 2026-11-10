@@ -10,6 +10,8 @@ TestStatus testFunction_Nothing() {
 // array with pointers to all tests
 TestStatus (*all_tests[])() = {
 		testFunction_Nothing,
+		testFunction_UART_TXRX_Loopback,
+		testFunction_UART_TX_External,
 };
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
@@ -22,6 +24,10 @@ TestStatus (*getTestFunction(int test_id))() {
 	switch(test_id){
 		case 0:
 			return testFunction_Nothing;
+		case 1:
+			return testFunction_UART_TXRX_Loopback;
+		case 2:
+			return testFunction_UART_TX_External;
 	}
 	return testFunction_Nothing;
 }

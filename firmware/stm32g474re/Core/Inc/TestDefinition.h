@@ -18,6 +18,8 @@ TestStatus testFunction_Nothing();
 
 // extern TestStatus yourTestNameHere();
 
+extern TestStatus testFunction_UART_TXRX_Loopback();
+extern TestStatus testFunction_UART_TX_External();
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 //                           TEST REGISTRATION
@@ -27,7 +29,6 @@ TestStatus testFunction_Nothing();
 TestStatus (*getTestFunction(int test_id))();
 
 void runAllTests(TestStatus results[]);
-
 
 
 
