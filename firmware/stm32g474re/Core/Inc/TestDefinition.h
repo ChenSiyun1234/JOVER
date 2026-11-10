@@ -5,7 +5,7 @@
  *      Author: Kalani
  */
 
-
+#pragma once
 
 typedef enum {PASS, FAIL, NEEDS_VERIFICATION} TestStatus;
 
@@ -14,19 +14,9 @@ typedef enum {PASS, FAIL, NEEDS_VERIFICATION} TestStatus;
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 
 
-TestStatus testFunction_Nothing() {
-	TestStatus status = PASS;
-	return status;
-};
+TestStatus testFunction_Nothing();
 
 // extern TestStatus yourTestNameHere();
-
-
-// array with pointers to all tests
-TestStatus (*all_tests[])() = {
-		testFunction_Nothing,
-};
-
 
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
@@ -34,23 +24,9 @@ TestStatus (*all_tests[])() = {
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 
 // Function that returns a pointer to a void function
-TestStatus (*getTestFunction(int test_id))() {
-	//! Every case must return an enum of TestStatus
-	switch(test_id){
-		case 0:
-			return testFunction_Nothing;
-	}
-	return testFunction_Nothing;
-}
+TestStatus (*getTestFunction(int test_id))();
 
-void runAllTests(TestStatus (results[sizeof(all_tests) / sizeof(all_tests[0])])){
-	int size = sizeof(all_tests) / sizeof(all_tests[0]);
-	for(int i = 0; i < size; ++i){
-		TestStatus (*testFunc)();
-		testFunc = getTestFunction(i);
-		results[i] = testFunc();
-	}
-}
+void runAllTests(TestStatus results[]);
 
 
 
