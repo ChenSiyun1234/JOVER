@@ -97,6 +97,7 @@ TestStatus testFunction_UART_TX_External() {
 	return NEEDS_VERIFICATION;
 }
 
+// TODO: finish this
 TestStatus testFunction_UART_RX_External() {
 	return FAIL;
 }
