@@ -5,7 +5,7 @@
  *      Author: Kalani
  */
 
-
+#pragma once
 
 typedef enum {PASS, FAIL, NEEDS_VERIFICATION} TestStatus;
 

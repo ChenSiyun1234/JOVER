@@ -115,6 +115,7 @@ int main(void)
     Error_Handler();
   }
 
+
   // Run a specific test, all the tests, or main proper
 	#if (RUN_TEST==1) && (TEST_ID != 0)
 		TestStatus (*testFunc)();
@@ -127,11 +128,17 @@ int main(void)
 		// actually run main if no tests are being run
 	#endif
 
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
+
+
+
     /* USER CODE END WHILE */
+
 
     /* USER CODE BEGIN 3 */
   }

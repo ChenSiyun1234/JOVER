@@ -67,6 +67,22 @@ TestStatus testFunction_UART_TXRX_Loopback() {
 	return PASS;
 }
 
+/*
+ * This function tests USART transmission with external
+ * hardware (Logic Analyzer, Serial Terminal, etc.).
+ *
+ * The result of the transmission must be inspected manually
+ * on the other device.
+ *
+ * UART settings (configure on external device) : 115200 8N1
+ *
+ * Transmitted message (ASCII format) : "it's JOVERwe're BARACK"
+ *
+ * SETUP: Connect TX pin (PA9) to external device RX pin. Connect
+ * 		  STM32 GND to external device GND. If using serial terminal
+ * 		  on PC, use a UART to USB adapter. Setup capture on
+ * 		  external device, then turn on STM32.
+ */
 TestStatus testFunction_UART_TX_External() {
 	if (!usart_init(USART1, 115200)) {
 		return FAIL;
