@@ -6,6 +6,7 @@ Tests must be written as a global function with no arguments, which returns type
 ## Including a Test in the System
 To include a test in the system, add the following to the document `TestDefinition.h`:
 - write your test name with the format `extern TestStatus yourTestNameHere();` under test declarations
+Also add the following to `TestDefinition.c`:
 - add your test function to the bottom of the array *allTests*
 - add a case in *getTestFunction* for your test
 Make sure that your test has the same location in *allTests* and *getTestFunction", or running all of the tests will not work properly. Also note that tests must actually return a value, and cannot run indefinitely.
