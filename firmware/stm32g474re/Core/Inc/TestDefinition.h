@@ -14,10 +14,7 @@ typedef enum {PASS, FAIL, NEEDS_VERIFICATION} TestStatus;
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 
 
-TestStatus testFunction_Nothing() {
-	TestStatus status = PASS;
-	return status;
-};
+TestStatus testFunction_Nothing();
 
 // extern TestStatus yourTestNameHere();
 
@@ -56,15 +53,9 @@ TestStatus (*getTestFunction(int test_id))() {
 	}
 	return testFunction_Nothing;
 }
+TestStatus (*getTestFunction(int test_id))();
 
-void runAllTests(TestStatus (results[sizeof(all_tests) / sizeof(all_tests[0])])){
-	int size = sizeof(all_tests) / sizeof(all_tests[0]);
-	for(int i = 0; i < size; ++i){
-		TestStatus (*testFunc)();
-		testFunc = getTestFunction(i);
-		results[i] = testFunc();
-	}
-}
+void runAllTests(TestStatus results[]);
 
 
 
