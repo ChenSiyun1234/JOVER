@@ -1,0 +1,59 @@
+{
+  "run_id": "r4-20261109c",
+  "total_timesteps": 1000000,
+  "showcase_cases": {
+    "hard": {
+      "ground": "terrain",
+      "mu": 0.9,
+      "behaviour": "trip",
+      "supply": 25.2,
+      "velocity": 0.0,
+      "yaw": 30.0,
+      "command_drop": 0.0,
+      "feedback_drop": 0.0,
+      "gyro_std": 0.01
+    },
+    "mid": {
+      "ground": "terrain",
+      "mu": 0.45,
+      "behaviour": "limit",
+      "supply": 25.2,
+      "velocity": 0.0,
+      "yaw": 30.0,
+      "command_drop": 0.0,
+      "feedback_drop": 0.0,
+      "gyro_std": 0.01
+    }
+  },
+  "controller_names": [
+    "open",
+    "governor",
+    "pi",
+    "pi_backoff",
+    "wheel_guard",
+    "learned",
+    "learned_c"
+  ],
+  "body_names": [
+    "world",
+    "chassis",
+    "control_board",
+    "diff_bar",
+    "rocker_l",
+    "wheel_lf",
+    "bogie_l",
+    "wheel_lm",
+    "wheel_lr",
+    "rocker_r",
+    "wheel_rf",
+    "bogie_r",
+    "wheel_rm",
+    "wheel_rr"
+  ],
+  "scene_file": "viz/scene/rover_scene.xml",
+  "source": "colab",
+  "sample_hz": 50,
+  "quaternion_order": "wxyz",
+  "selected_timesteps": 900000,
+  "trained_timesteps": 1000000
+}

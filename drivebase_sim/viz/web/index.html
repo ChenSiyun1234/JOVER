@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rover Training Replay</title>
+<style>
+  :root { --panel:rgba(16,18,24,.80); --text:#eef0f4; --dim:#a3abbb; --policy:#ff8c26; --old:#5aa9ff; --ref:#b9bec8; --cmd:#ffffff; --bad:#ff4040; }
+  html, body { margin:0; height:100%; color:var(--text); font:13px/1.45 system-ui, "Segoe UI", sans-serif; overflow:hidden;
+               background:linear-gradient(#6f9bd6 0%, #c9d6e3 55%, #e9dcc5 100%); }
+  #view { position:fixed; inset:0; }
+  .hud { position:fixed; top:10px; background:var(--panel); padding:8px 12px; border-radius:8px; }
+  #left { left:10px; max-width:min(540px, 58vw); pointer-events:none; }
+  #right { right:10px; min-width:210px; pointer-events:none; }
+  .row { display:grid; grid-template-columns:auto 1fr; column-gap:10px; }
+  .k { color:var(--dim); }
+  .wheels { display:grid; grid-template-columns:1fr 1fr; gap:4px 10px; margin-top:6px; }
+  .wheel { font-variant-numeric:tabular-nums; }
+  .bar { height:7px; background:#2b3140; border-radius:3px; position:relative; overflow:hidden; }
+  .bar i { position:absolute; left:0; top:0; bottom:0; border-radius:3px; }
+  .bar b { position:absolute; top:-1px; bottom:-1px; width:2px; background:#fff8; left:75.4%; }
+  .trip { color:var(--bad); font-weight:600; }
+  #charts { position:fixed; left:0; right:0; bottom:0; height:27vh; min-height:150px; display:grid; grid-template-columns:repeat(3, 1fr); gap:6px; padding:6px; box-sizing:border-box; pointer-events:none; }
+  #charts canvas { width:100%; height:100%; background:var(--panel); border-radius:8px; }
+  #keys { position:fixed; left:10px; bottom:calc(27vh + 16px); color:var(--dim); font-size:12px; background:var(--panel); padding:6px 10px; border-radius:8px; pointer-events:none; }
+  @media (max-width:760px) { #charts { grid-template-columns:1fr; height:24vh; } #c2, #c3, #keys { display:none; }
+    #left { max-width:calc(100vw - 44px); } #right { top:auto; bottom:calc(24vh + 12px); } }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="view"></div>
+<div class="hud" id="left"></div>
+<div class="hud" id="right"></div>
+<div id="keys">drag rotate · wheel zoom · F follow<br>space pause · [ ] speed · R restart<br>N / P checkpoint · L newest<br>C case · T reference · G ghost</div>
+<div id="charts"><canvas id="c1"></canvas><canvas id="c2"></canvas><canvas id="c3"></canvas></div>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+const LIMIT = 9.8;                       // A, the driver's over-current setting (datasheet)
+const PLANE_Z = 0.311;                   // flat-ground cases: plane height used by the sim
+const WHEELS = ["lf", "lm", "lr", "rf", "rm", "rr"];
+const GLASS = { acrylic_link: 0.5, acrylic_panel: 0.18 };
+const S = { t: 0, speed: 1, paused: false, follow: true, key: null, hold: 0, ghost: true, cam: true, kase: null, ref: null };
+let state = { meta: {}, episodes: [], progress: [] };
+const cache = new Map();
+
+// ------------------------------------------------------------------ names
+// ep_<timesteps>_<case>, ref_<controller>_<case>; anything else is one stand-alone trace.
+// Evaluation traces are <controller>_<case>: learned plays as the policy, the others as ghosts.
+function parse(name) {
+  let m = name.match(/^ep_(\d+)_(.+)$/);
+  if (m) return { kind: "ep", steps: +m[1], kase: m[2] };
+  m = name.match(/^ref_(.+)_([^_]+)$/);
+  if (m) return { kind: "ref", ctrl: m[1], kase: m[2] };
+  m = name.match(/^([a-z_]+?)_((?:turn|arc|straight|ood)_.+)$/);
+  if (m && m[1] === "learned") return { kind: "ep", steps: state.meta.selected_timesteps ?? state.meta.total_timesteps ?? 0, kase: m[2], eval: true };
+  if (m) return { kind: "ref", ctrl: m[1], kase: m[2] };
+  return { kind: "trace", kase: name };
+}
+function caseInfo(kase) {
+  const c = (state.meta.showcase_cases ?? state.meta.showcase ?? {})[kase];
+  if (c && typeof c === "object") {
+    const what = c.velocity ? `${c.velocity} m/s, ${c.yaw} deg/s` : `${c.yaw} deg/s in place`;
+    return { ground: c.ground, text: `${c.ground}, mu ${c.mu}, ${c.behaviour} mode, ${what}, ${c.supply} V` };
+  }
+  return { ground: /plane/.test(kase ?? "") ? "plane" : "terrain", text: typeof c === "string" ? c : "" };
+}
+const cases = () => [...new Set(state.episodes.map((s) => parse(s.name).kase))];
+const eps = () => state.episodes.filter((s) => { const p = parse(s.name); return p.kind !== "ref" && p.kase === S.kase; })
+  .sort((a, b) => (parse(a.name).steps ?? 0) - (parse(b.name).steps ?? 0));
+const refs = () => state.episodes.filter((s) => { const p = parse(s.name); return p.kind === "ref" && p.kase === S.kase; });
+function refName() {
+  const r = refs();
+  const pick = r.find((s) => parse(s.name).ctrl === S.ref) ?? r.find((s) => parse(s.name).ctrl === "pi_backoff") ?? r[0];
+  return pick ? pick.name : null;
+}
+function ground() { return caseInfo(S.kase).ground; }
+
+// ------------------------------------------------------------------ scene
+const host = document.getElementById("view");
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+host.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0xd8d3c6, 9, 26);
+const camera = new THREE.PerspectiveCamera(42, innerWidth / innerHeight, 0.05, 120);
+camera.up.set(0, 0, 1);
+camera.position.set(-2.4, -2.2, 1.7);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 0, 0.4);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xdfe9ff, 0x8a6e4e, 1.1));
+const sun = new THREE.DirectionalLight(0xfff1dc, 2.4);
+sun.position.set(-3, -2, 5);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+Object.assign(sun.shadow.camera, { left: -2.5, right: 2.5, top: 2.5, bottom: -2.5, near: 0.5, far: 15 });
+scene.add(sun, sun.target);
+
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(40, 40),
+  new THREE.MeshStandardMaterial({ color: 0xcfb08a, roughness: 0.95 }));
+plane.position.z = PLANE_Z;
+plane.receiveShadow = true;
+scene.add(plane);
+const grid = new THREE.GridHelper(40, 80, 0x8f7556, 0xb59a78);
+grid.rotation.x = Math.PI / 2;
+grid.position.z = PLANE_Z + 0.002;
+scene.add(grid);
+
+const statics = {};                       // terrain, rocks
+const bodies = { main: {}, ghost: {} };   // body name -> Group
+const tyres = { main: {}, ghost: {} };    // wheel tag -> tyre material
+const rover = { main: new THREE.Group(), ghost: new THREE.Group() };
+scene.add(rover.main, rover.ghost);
+
+function material(node, ghost) {
+  const glass = GLASS[node.split("__")[2]];
+  const m = new THREE.MeshStandardMaterial({ vertexColors: true, metalness: 0.15, roughness: 0.55, flatShading: true });
+  if (glass) { m.transparent = true; m.opacity = glass; m.depthWrite = false; }
+  if (ghost) { m.transparent = true; m.opacity = 0.22 * (glass ? glass : 1); m.depthWrite = false; m.color = new THREE.Color(0x9fb4ff); }
+  return m;
+}
+new GLTFLoader().load("rover.glb", (g) => {
+  const meshes = [];
+  g.scene.traverse((o) => { if (o.isMesh) meshes.push(o); });
+  for (const o of meshes) {
+    o.geometry.computeVertexNormals();
+    const node = o.name || o.parent?.name || "";
+    if (node.startsWith("static__")) {
+      o.material = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.95, flatShading: node.endsWith("rocks") });
+      o.receiveShadow = true; o.castShadow = node.endsWith("rocks");
+      o.removeFromParent(); scene.add(o); statics[node.slice(8)] = o;
+      continue;
+    }
+    const [, body] = node.split("__");
+    for (const which of ["main", "ghost"]) {
+      const mesh = which === "main" ? o : o.clone();
+      mesh.material = material(node, which === "ghost");
+      mesh.castShadow = which === "main";
+      mesh.position.set(0, 0, 0); mesh.quaternion.identity();
+      if (!bodies[which][body]) { bodies[which][body] = new THREE.Group(); rover[which].add(bodies[which][body]); }
+      bodies[which][body].add(mesh);
+      if (body.startsWith("wheel_") && node.endsWith("__tpu")) {
+        mesh.material.emissive = new THREE.Color(0x000000);
+        tyres[which][body.slice(6)] = mesh.material;
+      }
+    }
+  }
+});
+
+const trail = {};
+for (const [k, c] of [["main", 0xff8c26], ["ghost", 0x6f86ff]]) {
+  trail[k] = new THREE.Line(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: c, linewidth: 2 }));
+  trail[k].geometry.setAttribute("position", new THREE.BufferAttribute(new Float32Array(3 * 600), 3));
+  scene.add(trail[k]);
+}
+
+addEventListener("resize", () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); });
+addEventListener("keydown", (e) => {
+  const list = eps().map((s) => s.name);
+  const k = e.key.toLowerCase();
+  if (e.key === " ") { S.paused = !S.paused; e.preventDefault(); }
+  else if (e.key === "]") S.speed = Math.min(16, S.speed * 2);
+  else if (e.key === "[") S.speed = Math.max(0.125, S.speed / 2);
+  else if (k === "r") S.t = 0;
+  else if (k === "g") S.ghost = !S.ghost;
+  else if (k === "f") S.cam = !S.cam;
+  else if (k === "l") { S.follow = true; S.key = list.at(-1) ?? null; S.t = 0; }
+  else if (k === "c") { const c = cases(); if (c.length) { S.kase = c[(c.indexOf(S.kase) + 1) % c.length]; S.key = null; S.follow = true; S.t = 0; } }
+  else if (k === "t") { const r = refs().map((s) => parse(s.name).ctrl); if (r.length) { S.ref = r[(r.indexOf(S.ref) + 1) % r.length]; } }
+  else if ((k === "n" || k === "p") && list.length) {
+    const cur = list.includes(S.key) ? list.indexOf(S.key) : list.length - 1;
+    S.key = list[Math.min(list.length - 1, Math.max(0, cur + (k === "n" ? 1 : -1)))]; S.follow = false; S.t = 0;
+  }
+  ensure();
+});
+
+// ------------------------------------------------------------------ data
+const pending = new Set();
+function need(name) {
+  if (!name || cache.has(name) || pending.has(name)) return;
+  pending.add(name);
+  fetch("/api/ep/" + name, { cache: "no-store" }).then((r) => r.ok ? r.json() : null)
+    .then((d) => { if (d) cache.set(name, d); }).catch(() => {}).finally(() => pending.delete(name));
+}
+function ensure() {
+  if (S.kase === null || !cases().includes(S.kase)) S.kase = cases()[0] ?? null;
+  const list = eps();
+  if (list.length && (S.key === null || !list.some((s) => s.name === S.key)) && (S.follow || S.key === null)) S.key = list.at(-1).name;
+  [S.key, refName(), ...list.slice(-6).map((s) => s.name)].forEach(need);
+}
+async function poll() {
+  try {
+    const r = await fetch("/api/state", { cache: "no-store" });
+    state = await r.json();
+    ensure();
+  } catch (err) { /* server restarting: keep the last state */ }
+  setTimeout(poll, 4000);
+}
+function lowerBound(a, x) { let lo = 0, hi = a.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (a[m] <= x) lo = m; else hi = m - 1; } return lo; }
+const q0 = new THREE.Quaternion(), q1 = new THREE.Quaternion();
+function pose(which, d, t) {
+  const names = state.meta.body_names ?? [];
+  const tt = Math.min(Math.max(t, d.t[0]), d.t.at(-1));
+  const i = lowerBound(d.t, tt), j = Math.min(i + 1, d.t.length - 1);
+  const a = j > i ? (tt - d.t[i]) / (d.t[j] - d.t[i]) : 0;
+  names.forEach((n, b) => {
+    const g = bodies[which][n]; if (!g) return;
+    const p = d.pos[i][b], p2 = d.pos[j][b];
+    g.position.set(p[0] + a * (p2[0] - p[0]), p[1] + a * (p2[1] - p[1]), p[2] + a * (p2[2] - p[2]));
+    const [w, x, y, z] = d.quat[i][b], [w2, x2, y2, z2] = d.quat[j][b];
+    q0.set(x, y, z, w); q1.set(x2, y2, z2, w2);
+    g.quaternion.slerpQuaternions(q0, q1, a);
+  });
+  const cur = d.current[i], err = d.error ? d.error[i] : [1, 1, 1, 1, 1, 1];
+  WHEELS.forEach((w, k) => {
+    const m = tyres[which][w]; if (!m) return;
+    const r = Math.min(1, Math.abs(cur[k]) / LIMIT);
+    if (err[k] !== 1) m.emissive.setRGB(0.55 + 0.45 * Math.sin(performance.now() / 120), 0, 0);
+    else m.emissive.setRGB(1.2 * r * r, 0.35 * r * r * r, 0);
+  });
+  const chassis = names.indexOf("chassis");
+  const n = i + 1, arr = trail[which].geometry.attributes.position;
+  const lift = ground(S.key) === "plane" ? PLANE_Z + 0.01 : null;
+  for (let k = 0; k < Math.min(n, 600); k++) {
+    const p = d.pos[k][chassis];
+    arr.setXYZ(k, p[0], p[1], lift ?? p[2] - 0.3);
+  }
+  arr.needsUpdate = true;
+  trail[which].geometry.setDrawRange(0, Math.min(n, 600));
+  return { i, cur, err, yaw: d.yaw_rate[i], cmd: d.yaw_cmd[i], v: d.bus_v ? d.bus_v[i] : null, at: chassis >= 0 ? d.pos[i][chassis] : null };
+}
+
+// ------------------------------------------------------------------ text
+const fmtSteps = (s) => s >= 1e5 ? (s / 1e6).toFixed(2) + " M" : (s / 1e3).toFixed(0) + " k";
+function faults(s) {
+  const f = s?.faults ?? {};
+  const keys = Object.keys(f);
+  if (!keys.length) return "no driver faults";
+  const code = (e) => ({ 10: "over-current (A)", 9: "under-voltage (9)", 13: "comm loss (D)" })[e] ?? `error ${e}`;
+  return "<span class='trip'>" + keys.map((k) => { const v = f[k]; return typeof v === "object" ? `${k} ${code(v.error)} at ${v.time_s != null ? v.time_s.toFixed(2) + " s" : "?"}` : `${k} ${v}`; }).join(", ") + "</span>";
+}
+function describe(s, cmd) {
+  if (!s) return "-";
+  const y = s.mean_yaw_deg_s != null ? `${s.mean_yaw_deg_s.toFixed(1)} deg/s` + (cmd ? ` of ${cmd.toFixed(0)}` : "") : "-";
+  const d = s.drift_m != null ? `, drift ${s.drift_m.toFixed(2)} m` : "";
+  return `${y}${d}, ${faults(s)}`;
+}
+function rows(pairs) { return pairs.map(([k, v]) => `<div class="row"><span class="k">${k}</span><span>${v}</span></div>`).join(""); }
+function hud(cur, st, ref) {
+  const meta = state.meta, list = eps(), total = meta.trained_timesteps ?? meta.total_timesteps;
+  const curSum = state.episodes.find((s) => s.name === S.key);
+  const refSum = state.episodes.find((s) => s.name === refName());
+  const cmd = cur ? cur.yaw_cmd[0] : null;
+  const info = caseInfo(S.kase);
+  const L = [["Run", `${meta.run_id ?? "-"} (${meta.source ?? "-"})`],
+             ["Case", `${S.kase ?? "-"}${info.text ? " · " + info.text : ""}  (C: next of ${cases().length})`]];
+  const p = S.key ? parse(S.key) : null;
+  if (p?.eval) L.push(["Policy", `checkpoint picked on validation (${fmtSteps(p.steps)} steps), frozen test case`]);
+  else if (list.length && p?.kind === "ep") {
+    L.push(["Checkpoint", `${list.findIndex((s) => s.name === S.key) + 1} of ${list.length}` + (S.follow ? "  (following newest)" : "  (L: newest)")]);
+    L.push(["Training step", fmtSteps(p.steps) + (total ? " of " + fmtSteps(total) : "")]);
+  } else if (list.length) L.push(["Trace", `${S.key}  (${list.findIndex((s) => s.name === S.key) + 1} of ${list.length})`]);
+  else L.push(["Waiting", "for the first checkpoint"]);
+  L.push(["<span style='color:var(--policy)'>This policy</span>", describe(curSum, cmd)]);
+  if (refSum) L.push([`<span style='color:#8fa2ff'>Ghost: ${parse(refSum.name).ctrl}</span>`, describe(refSum, cmd) + (S.ghost ? "" : " (hidden, G)")]);
+  document.getElementById("left").innerHTML = rows(L);
+  const R = [["Time", `${S.t.toFixed(2)} s`], ["Playback", `×${S.speed}${S.paused ? " paused" : ""}`]];
+  let wheels = "";
+  if (st) {
+    R.push(["Yaw rate", `${st.yaw.toFixed(1)} / ${st.cmd.toFixed(0)} deg/s`]);
+    if (st.v != null) R.push(["Bus", `${st.v.toFixed(2)} V`]);
+    const cell = (k) => {
+      const a = Math.abs(st.cur[k]), r = Math.min(1, a / 13), e = st.err[k];
+      const col = e !== 1 ? "var(--bad)" : a >= LIMIT - 0.05 ? "#ff6a2a" : "#ffb347";
+      const label = e === 1 ? `${a.toFixed(1)} A` : `<span class="trip">off (err ${e === 10 ? "A" : e === 9 ? "9" : e === 13 ? "D" : e})</span>`;
+      return `<div class="wheel"><span class="k">${WHEELS[k]}</span> ${label}<div class="bar"><i style="width:${(100 * r).toFixed(0)}%;background:${col}"></i><b></b></div></div>`;
+    };
+    wheels = `<div class="k" style="margin-top:6px">Wheel current (tick = ${LIMIT} A)</div><div class="wheels">` +
+      [0, 3, 1, 4, 2, 5].map(cell).join("") + "</div>";
+  }
+  document.getElementById("right").innerHTML = rows(R) + wheels;
+}
+
+// ------------------------------------------------------------------ charts
+function chart(id, title, xlabel, lines, xr, yr, fmtx = (x) => x.toFixed(0)) {
+  const c = document.getElementById(id), dpr = devicePixelRatio || 1;
+  const W = c.clientWidth * dpr, H = c.clientHeight * dpr;
+  if (c.width !== W || c.height !== H) { c.width = W; c.height = H; }
+  const g = c.getContext("2d");
+  g.clearRect(0, 0, W, H);
+  const L = 40 * dpr, Rm = 10 * dpr, T = 22 * dpr, B = 30 * dpr;
+  const px = (x) => L + (x - xr[0]) / (xr[1] - xr[0] || 1) * (W - L - Rm);
+  const py = (y) => H - B - (y - yr[0]) / (yr[1] - yr[0] || 1) * (H - T - B);
+  g.font = `${12 * dpr}px system-ui`; g.fillStyle = "#eef0f4"; g.textAlign = "center";
+  g.fillText(title, W / 2, 15 * dpr);
+  g.fillStyle = "#a3abbb"; g.fillText(xlabel, W / 2, H - 4 * dpr);
+  g.strokeStyle = "#2f3646"; g.lineWidth = dpr;
+  for (let k = 0; k <= 4; k++) {
+    const y = yr[0] + (yr[1] - yr[0]) * k / 4, x = xr[0] + (xr[1] - xr[0]) * k / 4;
+    g.beginPath(); g.moveTo(L, py(y)); g.lineTo(W - Rm, py(y)); g.stroke();
+    g.textAlign = "right"; g.fillText(y.toFixed(Math.abs(yr[1] - yr[0]) < 5 ? 1 : 0), L - 4 * dpr, py(y) + 4 * dpr);
+    g.textAlign = "center"; g.fillText(fmtx(x), px(x), H - B + 14 * dpr);
+  }
+  for (const ln of lines) {
+    if (!ln.x.length) continue;
+    g.strokeStyle = ln.color; g.lineWidth = (ln.w ?? 1.5) * dpr; g.setLineDash(ln.dash ? [6 * dpr, 4 * dpr] : []);
+    g.beginPath();
+    ln.x.forEach((x, i) => { const X = px(x), Y = py(ln.y[i]); i ? g.lineTo(X, Y) : g.moveTo(X, Y); });
+    g.stroke();
+    if (ln.dots) { g.fillStyle = ln.color; ln.x.forEach((x, i) => { g.beginPath(); g.arc(px(x), py(ln.y[i]), 3 * dpr, 0, 7); g.fill(); }); }
+  }
+  g.setLineDash([]);
+}
+function drawCharts(cur, ref) {
+  const list = eps(), lines = [];
+  let top = 10, bot = 0, span = 8;
+  const add = (d, color, w, n) => {
+    const k = n ?? d.t.length;
+    lines.push({ x: d.t.slice(0, k), y: d.yaw_rate.slice(0, k), color, w });
+    top = Math.max(top, ...d.yaw_rate); bot = Math.min(bot, ...d.yaw_rate); span = Math.max(span, d.t.at(-1));
+  };
+  if (ref && S.ghost) add(ref, "#8fa2ff", 1.5);
+  const idx = list.findIndex((s) => s.name === S.key);
+  list.slice(Math.max(0, idx - 4), idx).forEach((s, k, arr) => { const d = cache.get(s.name); if (d) add(d, `rgba(90,169,255,${0.25 + 0.45 * (k + 1) / arr.length})`, 1); });
+  if (cur) {
+    add(cur, "#ff8c26", 2.4, lowerBound(cur.t, S.t) + 1);
+    lines.push({ x: [0, span], y: [cur.yaw_cmd[0], cur.yaw_cmd[0]], color: "#ffffff", w: 1.2, dash: true });
+    top = Math.max(top, cur.yaw_cmd[0]);
+  }
+  chart("c1", "Yaw rate, deg/s (orange policy, violet ghost)", "seconds", lines, [0, span], [Math.min(0, bot), top * 1.1]);
+  const pts = list.filter((s) => parse(s.name).kind === "ep");
+  const xs = pts.map((s) => parse(s.name).steps / 1e6), ys = pts.map((s) => s.mean_yaw_deg_s ?? 0);
+  const l2 = [{ x: xs, y: ys, color: "#ff8c26", w: 2, dots: true }];
+  const xmax = Math.max(xs.at(-1) ?? 0.1, (state.meta.total_timesteps ?? 0) / 1e6, 0.1);
+  let ymax = Math.max(10, ...ys);
+  for (const r of refs()) {
+    const v = r.mean_yaw_deg_s ?? 0, sel = r.name === refName();
+    l2.push({ x: [0, xmax], y: [v, v], color: sel ? "#8fa2ff" : "#b9bec8", w: sel ? 1.6 : 1 });
+    ymax = Math.max(ymax, v);
+  }
+  if (cur) { l2.push({ x: [0, xmax], y: [cur.yaw_cmd[0], cur.yaw_cmd[0]], color: "#ffffff", w: 1.2, dash: true }); ymax = Math.max(ymax, cur.yaw_cmd[0]); }
+  chart("c2", "Mean yaw rate per checkpoint", "training steps (M)", l2, [0, xmax], [0, ymax * 1.1], (x) => x.toFixed(1));
+  const P = state.progress;
+  if (P.length) {
+    const px = P.map((p) => p[0] / 1e6), py = P.map((p) => p[1]);
+    const lo = Math.min(...py), hi = Math.max(...py), pad = Math.max(1, 0.05 * (hi - lo));
+    chart("c3", "Training reward (rollout mean)", "training steps (M)", [{ x: px, y: py, color: "#8ce673", w: 2 }], [0, Math.max(px.at(-1), 0.1)], [lo - pad, hi + pad], (x) => x.toFixed(1));
+  } else chart("c3", "Training reward (rollout mean)", "training steps (M)", [], [0, 1], [0, 1]);
+}
+
+// ------------------------------------------------------------------ loop
+let last = performance.now(), lastText = 0;
+function frame(now) {
+  const dt = Math.min(0.1, (now - last) / 1000); last = now;
+  const cur = S.key ? cache.get(S.key) : null;
+  const rn = refName(), ref = rn ? cache.get(rn) : null;
+  const main = cur ?? ref;
+  if (main && !S.paused) {
+    const end = main.t.at(-1);
+    if (S.t >= end) {
+      S.hold += dt;
+      if (S.hold > 2) { S.t = 0; S.hold = 0; const list = eps(); if (S.follow && list.length) S.key = list.at(-1).name; }
+    } else S.t = Math.min(S.t + dt * S.speed, end);
+  }
+  const flat = ground(S.key ?? rn) === "plane";
+  plane.visible = grid.visible = flat;
+  for (const o of Object.values(statics)) o.visible = !flat;
+  let st = null;
+  rover.main.visible = !!main;
+  if (main) st = pose("main", main, S.t);
+  rover.ghost.visible = trail.ghost.visible = !!(cur && ref && S.ghost);
+  if (rover.ghost.visible) pose("ghost", ref, S.t);
+  if (st?.at && S.cam) {
+    const target = new THREE.Vector3(st.at[0], st.at[1], st.at[2] - 0.05);
+    camera.position.add(target.clone().sub(controls.target));
+    controls.target.copy(target);
+    sun.position.set(target.x - 3, target.y - 2, target.z + 5); sun.target.position.copy(target);
+  }
+  controls.update();
+  renderer.render(scene, camera);
+  if (now - lastText > 150) { lastText = now; hud(cur ?? ref, st, ref); drawCharts(cur ?? ref, cur ? ref : null); }
+  requestAnimationFrame(frame);
+}
+poll();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

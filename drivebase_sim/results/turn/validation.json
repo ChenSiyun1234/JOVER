@@ -1,0 +1,15 @@
+{
+  "cases": 38,
+  "electrical_rows_per_case": 8000,
+  "contact_rows_per_case": 4000,
+  "all_numeric_histories_finite": true,
+  "means_peaks_envelopes_and_clipping_recomputed": true,
+  "feedback_sample_noise_checked": true,
+  "source_scene_sha256": "7abbe717628241d6d4fcee91f3dba24bff08273a4be42d780b5d2ea70531a639",
+  "plane_cases": 20,
+  "feedback_cases": 6,
+  "overturned_cases": [
+    "terrain_sphere",
+    "terrain_sphere_c3"
+  ]
+}

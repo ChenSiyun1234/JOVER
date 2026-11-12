@@ -1,0 +1,22 @@
+{
+  "timesteps": 1000000,
+  "new_timesteps": 1000000,
+  "seed": 70000,
+  "workers": 8,
+  "wall_s": 2292.660086861,
+  "steps_per_s": 436.17455798654913,
+  "resumed_from": null,
+  "hyperparameters": {
+    "n_steps": 1000,
+    "batch_size": 250,
+    "n_epochs": 10,
+    "learning_rate": 0.0003,
+    "gamma": 0.995,
+    "gae_lambda": 0.95,
+    "clip_range": 0.2,
+    "ent_coef": 0.0,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "log_std_init": -1.5
+  }
+}

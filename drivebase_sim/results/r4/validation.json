@@ -1,0 +1,1457 @@
+{
+  "seeds": [
+    910000,
+    910001,
+    910002,
+    910003,
+    910004,
+    910005,
+    910006,
+    910007,
+    910008,
+    910009,
+    910010,
+    910011,
+    910012,
+    910013,
+    910014,
+    910015
+  ],
+  "episodes": [
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910000,
+      "return_value": -2.7874748471070365
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910001,
+      "return_value": -0.16875142877559443
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910002,
+      "return_value": -2.4246473804685675
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910003,
+      "return_value": -111.3922296136121
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910004,
+      "return_value": -0.5093795657018806
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910005,
+      "return_value": -4.984803038335143
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910006,
+      "return_value": -7.880552059413934
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910007,
+      "return_value": -0.26198508474425936
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910008,
+      "return_value": -0.20727828986558705
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910009,
+      "return_value": -0.11275663774886381
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910010,
+      "return_value": -5.20912065487133
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910011,
+      "return_value": -32.23073422902561
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910012,
+      "return_value": -0.14074201308908285
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910013,
+      "return_value": -1.5312686072028758
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910014,
+      "return_value": -5.708886005432318
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "seed": 910015,
+      "return_value": -4.036619026059797
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910000,
+      "return_value": -1.4791579815733948
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910001,
+      "return_value": -0.1354849419143766
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910002,
+      "return_value": -1.5121444443444436
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910003,
+      "return_value": -20.14346634248832
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910004,
+      "return_value": -0.5097662903610907
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910005,
+      "return_value": -5.06755337373143
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910006,
+      "return_value": -7.553658958261371
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910007,
+      "return_value": -0.29609703139311
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910008,
+      "return_value": -0.14461340459158456
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910009,
+      "return_value": -0.08046209951056382
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910010,
+      "return_value": -1.7758095871586392
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910011,
+      "return_value": -32.456176731727695
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910012,
+      "return_value": -0.11032945160095312
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910013,
+      "return_value": -1.9019804372951274
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910014,
+      "return_value": -5.764590963265039
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "seed": 910015,
+      "return_value": -3.586811371267544
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910000,
+      "return_value": -1.8630444542670377
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910001,
+      "return_value": -1.7525433136803714
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910002,
+      "return_value": -2.6407331752277687
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910003,
+      "return_value": -116.02910349611975
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910004,
+      "return_value": -100.54194793295511
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910005,
+      "return_value": -5.06084814935361
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910006,
+      "return_value": -4.849843383590902
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910007,
+      "return_value": -1.8082089561818933
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910008,
+      "return_value": -100.39939843751716
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910009,
+      "return_value": -1.0573827924132655
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910010,
+      "return_value": -1.1297488473541477
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910011,
+      "return_value": -28.988032922308687
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910012,
+      "return_value": -1.4338059565061643
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910013,
+      "return_value": -2.432072458955878
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910014,
+      "return_value": -3.097114388574072
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "seed": 910015,
+      "return_value": -2.3828378153048217
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910000,
+      "return_value": -4.260459737413479
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910001,
+      "return_value": -1.2116498697553006
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910002,
+      "return_value": -4.9907676547647934
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910003,
+      "return_value": -111.58730817434376
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910004,
+      "return_value": -1.0940498301055648
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910005,
+      "return_value": -6.8714376107845565
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910006,
+      "return_value": -2.708997080867793
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910007,
+      "return_value": -1.4405020283690546
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910008,
+      "return_value": -100.69020866321173
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910009,
+      "return_value": -0.9985706517439606
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910010,
+      "return_value": -3.4251534141605164
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910011,
+      "return_value": -32.40504419760772
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910012,
+      "return_value": -1.443526934370446
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910013,
+      "return_value": -2.127867611275765
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910014,
+      "return_value": -2.367254697660092
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "seed": 910015,
+      "return_value": -5.002040511617717
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910000,
+      "return_value": -4.289868982217619
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910001,
+      "return_value": -5.292597376189461
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910002,
+      "return_value": -7.131134097687232
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910003,
+      "return_value": -102.0002343075544
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910004,
+      "return_value": -0.7301111650036669
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910005,
+      "return_value": -9.30676069896969
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910006,
+      "return_value": -2.5215490600953387
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910007,
+      "return_value": -5.449214991409522
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910008,
+      "return_value": -100.30278485488044
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910009,
+      "return_value": -4.8987799022044145
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910010,
+      "return_value": -2.5456915653876377
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910011,
+      "return_value": -29.410947365909884
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910012,
+      "return_value": -6.346453657349664
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910013,
+      "return_value": -5.553362652943325
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910014,
+      "return_value": -2.6519193734169595
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "seed": 910015,
+      "return_value": -8.378329020659297
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910000,
+      "return_value": -2.1717546327174553
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910001,
+      "return_value": -9.006039707851633
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910002,
+      "return_value": -4.253409399035126
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910003,
+      "return_value": -101.49797810483867
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910004,
+      "return_value": -100.6416698470342
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910005,
+      "return_value": -8.143624935824784
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910006,
+      "return_value": -3.831063218159491
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910007,
+      "return_value": -7.753158774279388
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910008,
+      "return_value": -100.48154521355256
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910009,
+      "return_value": -8.371621937727642
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910010,
+      "return_value": -1.0405167679382554
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910011,
+      "return_value": -26.530855478619475
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910012,
+      "return_value": -8.278974723405765
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910013,
+      "return_value": -7.4849344214420155
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910014,
+      "return_value": -3.914051153244703
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "seed": 910015,
+      "return_value": -8.92534017714921
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910000,
+      "return_value": -3.303169217246429
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910001,
+      "return_value": -10.821819306802087
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910002,
+      "return_value": -7.220409625959495
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910003,
+      "return_value": -100.90825965250013
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910004,
+      "return_value": -100.33848359437455
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910005,
+      "return_value": -7.778583391618452
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910006,
+      "return_value": -4.854812005694551
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910007,
+      "return_value": -11.029372737007597
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910008,
+      "return_value": -100.28421149977841
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910009,
+      "return_value": -14.202114525928748
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910010,
+      "return_value": -1.2993697938555555
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910011,
+      "return_value": -24.924742338198694
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910012,
+      "return_value": -12.879859456661961
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910013,
+      "return_value": -10.34265922278485
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910014,
+      "return_value": -4.3551542285495515
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "seed": 910015,
+      "return_value": -9.447815563047076
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910000,
+      "return_value": -3.939403562118403
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910001,
+      "return_value": -12.039895181170744
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910002,
+      "return_value": -8.678181948979825
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910003,
+      "return_value": -109.85425925153429
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910004,
+      "return_value": -100.51772648473109
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910005,
+      "return_value": -8.77816521088254
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910006,
+      "return_value": -3.165625401720956
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910007,
+      "return_value": -9.660839544872653
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910008,
+      "return_value": -1.4176350896095948
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910009,
+      "return_value": -11.59211919811357
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910010,
+      "return_value": -2.6408565035461873
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910011,
+      "return_value": -27.5941515704195
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910012,
+      "return_value": -10.871504317222811
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910013,
+      "return_value": -16.222472895345756
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910014,
+      "return_value": -3.0282855160935784
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "seed": 910015,
+      "return_value": -7.637373384459788
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910000,
+      "return_value": -6.497410021219632
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910001,
+      "return_value": -15.38222335283724
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910002,
+      "return_value": -11.527520447162583
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910003,
+      "return_value": -100.76488043850999
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910004,
+      "return_value": -100.47195468080595
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910005,
+      "return_value": -6.006131896964301
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910006,
+      "return_value": -2.700521246893316
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910007,
+      "return_value": -12.88705936271101
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910008,
+      "return_value": -100.38877214171097
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910009,
+      "return_value": -14.531190698054221
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910010,
+      "return_value": -4.338557012086522
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910011,
+      "return_value": -30.04750921165007
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910012,
+      "return_value": -14.209586752532845
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910013,
+      "return_value": -20.563797217870878
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910014,
+      "return_value": -2.557145560371348
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "seed": 910015,
+      "return_value": -6.172241448842946
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910000,
+      "return_value": -8.63876327758016
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910001,
+      "return_value": -16.13225317322969
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910002,
+      "return_value": -13.169182825493257
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910003,
+      "return_value": -100.73998069486292
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910004,
+      "return_value": -100.06718744121386
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910005,
+      "return_value": -5.809770305995451
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910006,
+      "return_value": -2.241682422259491
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910007,
+      "return_value": -16.524219586573963
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910008,
+      "return_value": -100.14937725689131
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910009,
+      "return_value": -15.6030257077736
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910010,
+      "return_value": -6.482000009719855
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910011,
+      "return_value": -15.266702209123201
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910012,
+      "return_value": -15.831123199262553
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910013,
+      "return_value": -19.733100956579097
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910014,
+      "return_value": -1.3380666839571895
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "seed": 910015,
+      "return_value": -2.5954535589798002
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910000,
+      "return_value": -7.448161908245564
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910001,
+      "return_value": -17.744085302189124
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910002,
+      "return_value": -13.261096797586363
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910003,
+      "return_value": -100.81607360416098
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910004,
+      "return_value": -100.17137391812854
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910005,
+      "return_value": -7.188706389158807
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910006,
+      "return_value": -3.4106373503654015
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910007,
+      "return_value": -19.32578371333179
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910008,
+      "return_value": -100.14025886566718
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910009,
+      "return_value": -17.051097519836702
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910010,
+      "return_value": -5.625059595579187
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910011,
+      "return_value": -30.06609630317208
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910012,
+      "return_value": -16.180132057703773
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910013,
+      "return_value": -21.679117352024953
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910014,
+      "return_value": -2.6693683743592103
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "seed": 910015,
+      "return_value": -6.653891075448488
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910000,
+      "return_value": -6.611237797416145
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910001,
+      "return_value": -18.717237902921298
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910002,
+      "return_value": -12.970719476396688
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910003,
+      "return_value": -100.74885029400092
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910004,
+      "return_value": -101.22097861797215
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910005,
+      "return_value": -6.167608131926512
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910006,
+      "return_value": -1.7674369435361874
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910007,
+      "return_value": -111.90882721519871
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910008,
+      "return_value": -100.16224545601813
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910009,
+      "return_value": -20.262056751299237
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910010,
+      "return_value": -4.06070359588852
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910011,
+      "return_value": -14.714953577316951
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910012,
+      "return_value": -18.877906649416
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910013,
+      "return_value": -27.46216448776014
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910014,
+      "return_value": -2.190896065877092
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "seed": 910015,
+      "return_value": -7.957438640568722
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910000,
+      "return_value": -4.095672409125465
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910001,
+      "return_value": -8.360453970304832
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910002,
+      "return_value": -9.404465819530147
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910003,
+      "return_value": -100.58104623451908
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910004,
+      "return_value": -100.27894707395681
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910005,
+      "return_value": -6.110646711159855
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910006,
+      "return_value": -3.1641430131002877
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910007,
+      "return_value": -9.726988100983869
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910008,
+      "return_value": -100.3617242373891
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910009,
+      "return_value": -15.534473501021624
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910010,
+      "return_value": -2.7515381278409645
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910011,
+      "return_value": -27.043445944584033
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910012,
+      "return_value": -13.757305782244503
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910013,
+      "return_value": -22.839764690008497
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910014,
+      "return_value": -3.3693391032481257
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "seed": 910015,
+      "return_value": -8.399205304649655
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910000,
+      "return_value": -3.9482096989870312
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910001,
+      "return_value": -12.13967845976574
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910002,
+      "return_value": -108.00416532616934
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910003,
+      "return_value": -100.5321439049285
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910004,
+      "return_value": -100.29431268329404
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910005,
+      "return_value": -9.647888081867984
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910006,
+      "return_value": -2.6432058925227433
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910007,
+      "return_value": -13.12486577836118
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910008,
+      "return_value": -100.47940777644489
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910009,
+      "return_value": -15.457408409554485
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910010,
+      "return_value": -4.531366036009034
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910011,
+      "return_value": -29.40903572680002
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910012,
+      "return_value": -10.754240281498085
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910013,
+      "return_value": -5.275510494301886
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910014,
+      "return_value": -2.2197015161559235
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "seed": 910015,
+      "return_value": -7.070931877316097
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910000,
+      "return_value": -4.2791301789436655
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910001,
+      "return_value": -8.301221754056339
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910002,
+      "return_value": -4.578290250710433
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910003,
+      "return_value": -100.52411527654648
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910004,
+      "return_value": -100.23499369769767
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910005,
+      "return_value": -26.342965541803835
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910006,
+      "return_value": -1.1491777981466684
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910007,
+      "return_value": -7.980213384553651
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910008,
+      "return_value": -100.15574700341729
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910009,
+      "return_value": -5.845891542405065
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910010,
+      "return_value": -8.739072478539873
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910011,
+      "return_value": -23.04899641621816
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910012,
+      "return_value": -5.278957318315193
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910013,
+      "return_value": -12.45414984907919
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910014,
+      "return_value": -0.9516311341824019
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "seed": 910015,
+      "return_value": -2.709229090233923
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910000,
+      "return_value": -6.0522073113851285
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910001,
+      "return_value": -9.17082495091527
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910002,
+      "return_value": -4.483589068566162
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910003,
+      "return_value": -100.66533950153092
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910004,
+      "return_value": -100.11635305310661
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910005,
+      "return_value": -7.329844356883859
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910006,
+      "return_value": -0.5119924087846431
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910007,
+      "return_value": -10.59444183173899
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910008,
+      "return_value": -100.12409904655844
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910009,
+      "return_value": -7.245339150698186
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910010,
+      "return_value": -11.645606930907393
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910011,
+      "return_value": -28.419560754701198
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910012,
+      "return_value": -6.731157805279509
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910013,
+      "return_value": -14.044147759138486
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910014,
+      "return_value": -0.7277363272718087
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "seed": 910015,
+      "return_value": -2.344452423694717
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910000,
+      "return_value": -6.99142369913512
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910001,
+      "return_value": -15.151567558489571
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910002,
+      "return_value": -27.928409190022855
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910003,
+      "return_value": -100.8090907823403
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910004,
+      "return_value": -100.19436965493708
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910005,
+      "return_value": -7.157088672000283
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910006,
+      "return_value": -0.3737246466176388
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910007,
+      "return_value": -17.073090384392128
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910008,
+      "return_value": -100.18626122428925
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910009,
+      "return_value": -13.868844634508875
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910010,
+      "return_value": -13.429642758164567
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910011,
+      "return_value": -12.162978575838618
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910012,
+      "return_value": -13.61776917406519
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910013,
+      "return_value": -5.764637874173776
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910014,
+      "return_value": -1.5868771444555043
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "seed": 910015,
+      "return_value": -3.332247330062669
+    }
+  ],
+  "checkpoints": [
+    {
+      "checkpoint": "checkpoints/ppo_0000250000.zip",
+      "mean_return": -11.224201780090874
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000500000.zip",
+      "mean_return": -5.157381463155293
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0000750000.zip",
+      "mean_return": -23.466666655019417
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001000000.zip",
+      "mean_return": -17.664052416753268
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001250000.zip",
+      "mean_return": -18.55060869199241
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001500000.zip",
+      "mean_return": -25.145408655801276
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0001750000.zip",
+      "mean_return": -26.49942726000051
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002000000.zip",
+      "mean_return": -21.102405941301328
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002250000.zip",
+      "mean_return": -28.065406343138992
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002500000.zip",
+      "mean_return": -27.520118081843464
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0002750000.zip",
+      "mean_return": -29.339433757934884
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003000000.zip",
+      "mean_return": -34.73757885021959
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003250000.zip",
+      "mean_return": -27.236197501479175
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003500000.zip",
+      "mean_return": -32.845754496498564
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0003750000.zip",
+      "mean_return": -25.785861419678113
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004000000.zip",
+      "mean_return": -25.637918292572582
+    },
+    {
+      "checkpoint": "checkpoints/ppo_0004250000.zip",
+      "mean_return": -27.47675145646834
+    }
+  ],
+  "selected": {
+    "checkpoint": "checkpoints/ppo_0000500000.zip",
+    "mean_return": -5.157381463155293
+  },
+  "selection": "Highest mean training-distribution validation return; no matrix cases used"
+}

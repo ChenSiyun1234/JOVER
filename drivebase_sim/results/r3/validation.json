@@ -1,0 +1,13 @@
+{
+  "case_count": 71,
+  "all_requested_cases_present": true,
+  "all_summaries_match_histories": true,
+  "power_balance_max_error_A": 0.0,
+  "all_faults_latched_and_zero_torque": true,
+  "all_torques_within_envelope": true,
+  "scene_sha256": "7abbe717628241d6d4fcee91f3dba24bff08273a4be42d780b5d2ea70531a639",
+  "overturned_cases": [
+    "fix_mu0.9_trip_pi"
+  ],
+  "numpy_version": "2.5.2"
+}

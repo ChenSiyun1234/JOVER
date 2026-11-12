@@ -1,0 +1,83 @@
+{
+  "model": "best.zip",
+  "random_observations": 10000,
+  "random_max_abs_error": 3.5762786865234375e-07,
+  "matrix_max_abs_error": 3.5762786865234375e-07,
+  "matrix_observations": 10000,
+  "compile": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "ziglang",
+        "cc",
+        "-shared",
+        "-O2",
+        "-ffp-contract=off",
+        "policy.c",
+        "-o",
+        "policy.dll"
+      ],
+      "attempt": 0,
+      "stdout": "",
+      "stderr": "error: sub-compilation of mingw-w64 libmingw32.lib failed\n    wmcodecdspuuid.c:1:1: note: failed to parse 'tmp\\6b1e4a06c61d4581-wmcodecdspuuid.obj.d': none\n"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ziglang",
+        "cc",
+        "-shared",
+        "-O2",
+        "-ffp-contract=off",
+        "policy.c",
+        "-o",
+        "policy.dll"
+      ],
+      "attempt": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ziglang",
+        "cc",
+        "-target",
+        "thumb-freestanding-eabihf",
+        "-mcpu=cortex_m4",
+        "-mfpu=fpv4-sp-d16",
+        "-mfloat-abi=hard",
+        "-O2",
+        "-ffp-contract=off",
+        "-c",
+        "policy.c",
+        "-o",
+        "policy_m4.o"
+      ],
+      "attempt": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "m4_object_sections_bytes": {
+    "text": 4854,
+    "rodata": 26792,
+    "data": 0,
+    "bss": 0
+  },
+  "parameters": 6662,
+  "multiply_adds": 6528,
+  "tanhf_calls": 128,
+  "stack_arrays_bytes": 640,
+  "requested_cortex_target": "thumbv7em-none-eabihf cortex-m4 fpv4-sp-d16 hard-float",
+  "zig_target": "thumb-freestanding-eabihf with cortex_m4 (ARMv7E-M)",
+  "estimated_time_us_at_170MHz": {
+    "lower": 150.0,
+    "upper": 600.0,
+    "measured": false
+  },
+  "timing_basis": "6528 MACs at 2-6 cycles plus 128 library tanhf calls at 100-500 cycles; no board measurement"
+}

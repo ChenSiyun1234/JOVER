@@ -1,0 +1,869 @@
+{
+  "seeds": [
+    910000,
+    910001,
+    910002,
+    910003,
+    910004,
+    910005,
+    910006,
+    910007,
+    910008,
+    910009,
+    910010,
+    910011,
+    910012,
+    910013,
+    910014,
+    910015
+  ],
+  "episodes": [
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910000,
+      "return_value": -4.131642888677049
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910001,
+      "return_value": -1.9945358344128417
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910002,
+      "return_value": -2.9857027892393107
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910003,
+      "return_value": -106.32119014356428
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910004,
+      "return_value": -0.4699736434726018
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910005,
+      "return_value": -5.916680446971845
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910006,
+      "return_value": -7.39853851698903
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910007,
+      "return_value": -0.9781675967890442
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910008,
+      "return_value": -0.10427345582015725
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910009,
+      "return_value": -0.05796829158576304
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910010,
+      "return_value": -7.366034650521381
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910011,
+      "return_value": -35.90061455541529
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910012,
+      "return_value": -0.08273221704930596
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910013,
+      "return_value": -1.3947481045302117
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910014,
+      "return_value": -6.193524423301026
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "seed": 910015,
+      "return_value": -4.260044415341993
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910000,
+      "return_value": -3.54454897198867
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910001,
+      "return_value": -0.2879045132068062
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910002,
+      "return_value": -2.0269525654011917
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910003,
+      "return_value": -108.73624388995994
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910004,
+      "return_value": -0.5174384158136154
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910005,
+      "return_value": -5.724448652648837
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910006,
+      "return_value": -8.466131235424763
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910007,
+      "return_value": -0.5686618210963891
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910008,
+      "return_value": -0.1124717972557273
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910009,
+      "return_value": -0.06744740340481986
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910010,
+      "return_value": -6.017770457617135
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910011,
+      "return_value": -37.58875871920757
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910012,
+      "return_value": -0.09858233224320788
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910013,
+      "return_value": -1.7986185360160842
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910014,
+      "return_value": -6.784765414428749
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "seed": 910015,
+      "return_value": -4.372765359432847
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910000,
+      "return_value": -3.439224527641366
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910001,
+      "return_value": -0.6743218627602139
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910002,
+      "return_value": -2.0817918719471944
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910003,
+      "return_value": -109.96803298417485
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910004,
+      "return_value": -0.543451745699761
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910005,
+      "return_value": -5.120270728285017
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910006,
+      "return_value": -8.478971478928557
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910007,
+      "return_value": -0.8867716586952338
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910008,
+      "return_value": -0.12092236797368999
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910009,
+      "return_value": -0.06546413133690132
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910010,
+      "return_value": -4.891088831261764
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910011,
+      "return_value": -32.58001842163027
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910012,
+      "return_value": -0.09130563341492605
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910013,
+      "return_value": -1.5968296981036483
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910014,
+      "return_value": -6.350581033991401
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "seed": 910015,
+      "return_value": -4.312058630786044
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910000,
+      "return_value": -3.3205500634288962
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910001,
+      "return_value": -3.0821471935260893
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910002,
+      "return_value": -2.5962409100532047
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910003,
+      "return_value": -113.90075474701686
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910004,
+      "return_value": -0.6135575976144176
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910005,
+      "return_value": -5.143513526388633
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910006,
+      "return_value": -7.986838404027817
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910007,
+      "return_value": -5.486724318518173
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910008,
+      "return_value": -0.16238664949926004
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910009,
+      "return_value": -0.1070606822416229
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910010,
+      "return_value": -3.8664740297786286
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910011,
+      "return_value": -32.02825015338695
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910012,
+      "return_value": -0.15674100746715938
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910013,
+      "return_value": -1.6778396395491704
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910014,
+      "return_value": -6.621109787101945
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "seed": 910015,
+      "return_value": -4.253372125947122
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910000,
+      "return_value": -2.007376606940775
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910001,
+      "return_value": -0.3795363232262871
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910002,
+      "return_value": -1.694263721208244
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910003,
+      "return_value": -115.04242107176968
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910004,
+      "return_value": -0.6543379474685244
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910005,
+      "return_value": -5.363305712925756
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910006,
+      "return_value": -7.902289213840187
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910007,
+      "return_value": -0.5854845698381388
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910008,
+      "return_value": -0.34103671586195405
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910009,
+      "return_value": -0.24615882417216767
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910010,
+      "return_value": -2.3292682495623227
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910011,
+      "return_value": -31.475917726321757
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910012,
+      "return_value": -0.26951692943830946
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910013,
+      "return_value": -2.0760223524727017
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910014,
+      "return_value": -6.819235021543437
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "seed": 910015,
+      "return_value": -4.433582877776492
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910000,
+      "return_value": -1.4462808496563522
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910001,
+      "return_value": -0.5311045344574309
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910002,
+      "return_value": -2.386447154521894
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910003,
+      "return_value": -20.707024283475
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910004,
+      "return_value": -0.6439767923810983
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910005,
+      "return_value": -5.113083210210309
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910006,
+      "return_value": -6.532466126729063
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910007,
+      "return_value": -1.4260022316345358
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910008,
+      "return_value": -0.38344839878763837
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910009,
+      "return_value": -0.3527509155309174
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910010,
+      "return_value": -1.3576601851067376
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910011,
+      "return_value": -35.87170417158593
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910012,
+      "return_value": -0.38354225563861827
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910013,
+      "return_value": -1.6148156674425818
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910014,
+      "return_value": -5.734632851940876
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "seed": 910015,
+      "return_value": -3.734709350644222
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910000,
+      "return_value": -1.1393119783470775
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910001,
+      "return_value": -3.20292640174673
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910002,
+      "return_value": -1.282197885785186
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910003,
+      "return_value": -109.1767509885539
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910004,
+      "return_value": -0.6024146981660561
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910005,
+      "return_value": -8.519421208481665
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910006,
+      "return_value": -2.97062920562301
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910007,
+      "return_value": -5.37753741622881
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910008,
+      "return_value": -0.28270306385563115
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910009,
+      "return_value": -0.2518794687891613
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910010,
+      "return_value": -0.922800578456848
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910011,
+      "return_value": -36.94554308133279
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910012,
+      "return_value": -0.2835782808876381
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910013,
+      "return_value": -0.688350723190467
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910014,
+      "return_value": -2.5446890715531576
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "seed": 910015,
+      "return_value": -2.1027762015934597
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910000,
+      "return_value": -1.1702101117343542
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910001,
+      "return_value": -3.5367400277610472
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910002,
+      "return_value": -1.6608901122586686
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910003,
+      "return_value": -110.62508154198422
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910004,
+      "return_value": -0.5906369396173744
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910005,
+      "return_value": -11.307012762401941
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910006,
+      "return_value": -2.257646916662626
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910007,
+      "return_value": -5.423532414407956
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910008,
+      "return_value": -0.30746633085515024
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910009,
+      "return_value": -0.25110129736067793
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910010,
+      "return_value": -0.8762946627047403
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910011,
+      "return_value": -34.95823313243003
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910012,
+      "return_value": -0.2873548434731788
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910013,
+      "return_value": -0.8743490007603429
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910014,
+      "return_value": -2.9343608686676554
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "seed": 910015,
+      "return_value": -2.8146309418400617
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910000,
+      "return_value": -1.3433533571747551
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910001,
+      "return_value": -0.347248281692746
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910002,
+      "return_value": -3.1889293376409285
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910003,
+      "return_value": -21.100302138574275
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910004,
+      "return_value": -0.6706931284433966
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910005,
+      "return_value": -6.688744432060342
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910006,
+      "return_value": -2.1493056627408595
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910007,
+      "return_value": -5.054125663864542
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910008,
+      "return_value": -0.338882129159326
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910009,
+      "return_value": -0.23443229494559326
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910010,
+      "return_value": -1.0425662043419361
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910011,
+      "return_value": -35.44015079332113
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910012,
+      "return_value": -0.27081026596178787
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910013,
+      "return_value": -1.1838572326810868
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910014,
+      "return_value": -3.2021551939382156
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "seed": 910015,
+      "return_value": -4.018952204320931
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910000,
+      "return_value": -1.941580771364585
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910001,
+      "return_value": -2.893857016820004
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910002,
+      "return_value": -4.173833720800864
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910003,
+      "return_value": -21.07263321332556
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910004,
+      "return_value": -0.6594302633184296
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910005,
+      "return_value": -6.377722059839396
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910006,
+      "return_value": -2.6063690346642874
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910007,
+      "return_value": -1.952328084949606
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910008,
+      "return_value": -0.4287605838416607
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910009,
+      "return_value": -0.9340390868019057
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910010,
+      "return_value": -1.324524555186717
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910011,
+      "return_value": -36.7903665726158
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910012,
+      "return_value": -1.1770942034664273
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910013,
+      "return_value": -2.9966021551696627
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910014,
+      "return_value": -2.763561992316815
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "seed": 910015,
+      "return_value": -5.568769514072608
+    }
+  ],
+  "checkpoints": [
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000100000.zip",
+      "mean_return": -11.59727324835507
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000200000.zip",
+      "mean_return": -11.669594380321648
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000300000.zip",
+      "mean_return": -11.32506910041443
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000400000.zip",
+      "mean_return": -11.937722552221622
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000500000.zip",
+      "mean_return": -11.35123461652292
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000600000.zip",
+      "mean_return": -5.513728061233951
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000700000.zip",
+      "mean_return": -11.018344390786975
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000800000.zip",
+      "mean_return": -11.242221369057502
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+      "mean_return": -5.392156770053866
+    },
+    {
+      "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0001000000.zip",
+      "mean_return": -5.853842051784646
+    }
+  ],
+  "selected": {
+    "checkpoint": "/content/run/r4-20261109c/checkpoints/ppo_0000900000.zip",
+    "mean_return": -5.392156770053866
+  },
+  "selection": "Highest mean training-distribution validation return; no matrix cases used"
+}
